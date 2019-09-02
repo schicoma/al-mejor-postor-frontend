@@ -31,6 +31,7 @@ import { ProductDetailComponent } from './components/views/product-detail/produc
 import { UsuariosService } from './services/usuarios.service';
 import { AuthService } from './services/core/auth.service';
 import { VerifyAccountComponent } from './components/views/verify-account/verify-account.component';
+import { MustMatchDirective } from './directives/must-match.directive';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { VerifyAccountComponent } from './components/views/verify-account/verify
     SearchComponent,
     PageNotFoundComponent,
     ProductDetailComponent,
-    VerifyAccountComponent
+    VerifyAccountComponent,
+    MustMatchDirective
   ],
   imports: [
     BrowserModule,

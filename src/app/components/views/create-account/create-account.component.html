@@ -7,40 +7,75 @@
             <div class="col-lg-12" *ngIf="!mostrarPantallaConfirmacion">
                 <div class="login_part_form">
                     <div class="login_part_form_iner">
+                        <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                            {{errorMessage}}
+                        </div>
                         <h3>Regístrate o <a routerLink="/login">inicia sesión</a></h3>
                         <form (ngSubmit)="registrarUsuario(myForm)" class="row contact_form" novalidate="novalidate"
-                            #myForm="ngForm">
+                            #myForm="ngForm" [mustMatch]="['password', 'confirmarPassword']">
                             <div class="col-md-12 form-group p_star">
                                 <input type="text" class="form-control" id="name" name="name" value=""
-                                    [(ngModel)]="usuario.nombres" #nombre="ngModel" placeholder="Nombres">
+                                    required="required" [(ngModel)]="usuario.nombres" #nombre="ngModel"
+                                    placeholder="Nombres"
+                                    [ngClass]="{'invalid-input': myForm.submitted && nombre.invalid}">
+                                <div *ngIf="myForm.submitted && nombre.invalid" class="invalid-message">
+                                    <span *ngIf="nombre.errors.required">Campo requerido</span>
+                                </div>
                             </div>
                             <div class="col-md-12 form-group p_star">
                                 <input type="text" class="form-control" id="lastname" name="lastname" value=""
-                                    [(ngModel)]="usuario.apellidos" #nombre="ngModel" placeholder="Apellidos">
+                                    required="required" [(ngModel)]="usuario.apellidos" #apellidos="ngModel"
+                                    placeholder="Apellidos"
+                                    [ngClass]="{'invalid-input': myForm.submitted && apellidos.invalid}">
+                                <div *ngIf="myForm.submitted && apellidos.invalid" class="invalid-message">
+                                    <span *ngIf="apellidos.errors.required">Campo requerido</span>
+                                </div>
                             </div>
                             <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="email" name="email" value=""
-                                    [(ngModel)]="usuario.email" #email="ngModel" placeholder="Correo electrónico">
+                                <input type="text" class="form-control" id="email" name="email" email value=""
+                                    required="required" [(ngModel)]="usuario.email" #email="ngModel"
+                                    placeholder="Correo electrónico"
+                                    [ngClass]="{'invalid-input': myForm.submitted && email.invalid}">
+                                <div *ngIf="myForm.submitted && email.invalid" class="invalid-message">
+                                    <span *ngIf="email.errors.required">Campo requerido</span>
+                                    <span *ngIf="email.errors.email">Correo electrónico inválido</span>
+                                </div>
                             </div>
                             <div class="col-md-12 form-group p_star">
                                 <input type="tel" class="form-control" id="telephone" name="telephone" value=""
-                                    [(ngModel)]="usuario.telefono" #telefono="ngModel" placeholder="Teléfono">
+                                    required="required" [(ngModel)]="usuario.telefono" #telefono="ngModel"
+                                    placeholder="Teléfono"
+                                    [ngClass]="{'invalid-input': myForm.submitted && telefono.invalid}">
+                                <div *ngIf="myForm.submitted && telefono.invalid" class="invalid-message">
+                                    <span *ngIf="telefono.errors.required">Campo requerido</span>
+                                </div>
                             </div>
                             <div class="col-md-12 form-group p_star">
                                 <input type="password" class="form-control" id="password" name="password" value=""
-                                    [(ngModel)]="usuario.password" #password="ngModel" placeholder="Contraseña">
+                                    required="required" minlength="8" [(ngModel)]="usuario.password" #password="ngModel"
+                                    placeholder="Contraseña"
+                                    [ngClass]="{'invalid-input': myForm.submitted && password.invalid}">
+                                <div *ngIf="myForm.submitted && password.invalid" class="invalid-message">
+                                    <span *ngIf="password.errors.required">Campo requerido</span>
+                                    <span *ngIf="password.errors.minlength">La contraseña debe tener como mínimo 8
+                                        caracteres</span>
+                                </div>
                             </div>
                             <div class="col-md-12 form-group p_star">
-                                <input type="password" class="form-control" id="confirm-password"
-                                    [(ngModel)]="confimarPassword" #confirmarPassword="ngModel" name="confirm-password"
-                                    value="" placeholder="Confirma tu contraseña">
+                                <input type="password" class="form-control" id="confirmarPassword" required="required"
+                                    [(ngModel)]="confirmPassword" #confirmarPassword="ngModel" name="confirmarPassword"
+                                    value="" placeholder="Confirma tu contraseña"
+                                    [ngClass]="{'invalid-input': myForm.submitted && confirmarPassword.invalid}">
+                                <div *ngIf="myForm.submitted && confirmarPassword.invalid" class="invalid-message">
+                                    <span *ngIf="confirmarPassword.errors.required">Campo requerido</span>
+                                    <span *ngIf="confirmarPassword.errors.mustMatch">La contraseñas no coinciden</span>
+                                </div>
                             </div>
                             <div class="col-md-12 form-group">
                                 <!--<div class="creat_account d-flex align-items-center">
                                     <input type="checkbox" id="f-option" name="selector">
                                     <label for="f-option">Remember me</label>
                                 </div>-->
-                                {{bloquearBoton}}
                                 <button type="submit" class="btn_3" [disabled]="bloquearBoton">
                                     Aceptar
                                 </button>
