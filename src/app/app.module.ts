@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 
 //Firebase
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { environment } from '../environments/environment';
@@ -27,6 +28,9 @@ import { CreateAccountComponent } from './components/views/create-account/create
 import { SearchComponent } from './components/views/search/search.component';
 import { PageNotFoundComponent } from './components/views/page-not-found/page-not-found.component';
 import { ProductDetailComponent } from './components/views/product-detail/product-detail.component';
+import { UsuariosService } from './services/usuarios.service';
+import { AuthService } from './services/core/auth.service';
+import { VerifyAccountComponent } from './components/views/verify-account/verify-account.component';
 
 @NgModule({
   declarations: [
@@ -41,18 +45,22 @@ import { ProductDetailComponent } from './components/views/product-detail/produc
     CreateAccountComponent,
     SearchComponent,
     PageNotFoundComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    VerifyAccountComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [
     AngularFirestore,
-    ProductService
+    ProductService,
+    UsuariosService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

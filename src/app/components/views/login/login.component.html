@@ -18,14 +18,14 @@
                     <div class="login_part_form_iner">
                         <h3>Bienvenido! <br>
                             Por favor, inicia sesión ahora</h3>
-                        <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                        <form (ngSubmit)="iniciarSesion(myForm)" class="row contact_form" #myForm="ngForm" novalidate="novalidate">
                             <div class="col-md-12 form-group p_star">
                                 <input type="text" class="form-control" id="email" name="email" value=""
-                                    placeholder="Correo electrónico">
+                                    [(ngModel)]="credenciales.email" #email="ngModel" placeholder="Correo electrónico">
                             </div>
                             <div class="col-md-12 form-group p_star">
                                 <input type="password" class="form-control" id="password" name="password" value=""
-                                    placeholder="Contraseña">
+                                    [(ngModel)]="credenciales.password" #password="ngModel" placeholder="Contraseña">
                             </div>
                             <div class="col-md-12 form-group">
                                 <!--<div class="creat_account d-flex align-items-center">
@@ -35,7 +35,7 @@
                                 <button type="submit" value="submit" class="btn_3">
                                     Ingresar
                                 </button>
-                                <a class="lost_pass" href="#">Olvidé mi contraseña</a>
+                                <!--<a class="lost_pass" href="#">Olvidé mi contraseña</a>-->
                             </div>
                         </form>
                     </div>

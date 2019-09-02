@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AuthService } from 'src/app/services/core/auth.service';
 declare var $: any;
 
 @Component({
@@ -7,10 +8,14 @@ declare var $: any;
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
+  estaElUsuarioEnSesion: boolean;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+    this.estaElUsuarioEnSesion = this.authService.estaElUsuarioEnSesion();
   }
 
   ngAfterViewInit(): void {
@@ -25,6 +30,13 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     $("#close_search").on("click", function () {
       $('#search_input_box').slideUp(500);
     });
+
+    this.estaElUsuarioEnSesion = this.authService.estaElUsuarioEnSesion();
+
+  }
+
+  mostrarUsuario() {
+    alert("Bienvenido " + this.authService.usuario.email);
   }
 
 }
