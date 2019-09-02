@@ -13,7 +13,6 @@ export class AuthService {
 
   constructor(public afAuth: AngularFireAuth, public router: Router) {
     this.afAuth.authState.subscribe(user => {
-      console.log("suscribe");
       if (user && user.emailVerified) {
         this.usuario = user;
         localStorage.setItem('user', JSON.stringify(this.usuario));
@@ -24,19 +23,11 @@ export class AuthService {
   }
 
   crearUsuario(email: string, password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(value => {
-      console.log('Success! createUserWithEmailAndPassword', value);
-    }).catch(error => {
-      console.log('Something went wrong:', error.message);
-    });
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   iniciarSesion(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)/*.then(value => {
-      console.log('Nice, it worked!');
-    }).catch(error => {
-      console.log('Something went wrong:', error.message);
-    });*/;
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   salirSesion() {
