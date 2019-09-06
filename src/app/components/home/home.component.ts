@@ -7,6 +7,10 @@ declare var $: any;
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
+  dias: any;
+  horas: any;
+  minutos: any;
+  segundos: any;
 
   ngAfterViewInit(): void {
     var best_product_slider = $('.best_product_slider');
@@ -151,10 +155,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
       var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
       var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
 
-      $("#days").html("<span>Days</span>" + days);
-      $("#hours").html("<span>Hours</span>" + (hours < 10 ? "0" + hours: hours));
-      $("#minutes").html("<span>Minutes</span>" + (minutes < 10 ? "0" + minutes: minutes));
-      $("#seconds").html("<span>Seconds</span>" + (seconds < 10 ? "0" + seconds: seconds));
+      this.dias = days;
+      this.horas = (hours < 10 ? "0" + hours : hours);
+      this.minutos = (minutes < 10 ? "0" + minutes : minutes);
+      this.segundos = (seconds < 10 ? "0" + seconds : seconds);
 
     }
 

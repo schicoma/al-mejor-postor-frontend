@@ -13,12 +13,14 @@ export class UsuariosService {
 
   insertarUsuario(usuario: Usuario) {
     return this.firebase.collection('usuarios').doc(usuario.email).set({
+      uid: usuario.uid,
       nombres: usuario.nombres,
       apellidos: usuario.apellidos,
       email: usuario.email,
       password: usuario.password,
       telefono: usuario.telefono,
-      estado: usuario.estado
+      estado: usuario.estado,
+      token: usuario.token
     });
   }
 }
