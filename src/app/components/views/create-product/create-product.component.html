@@ -1,101 +1,94 @@
 <app-header></app-header>
 
 <!-- registrar producto form-->
-<div class="container padding_top">
-    <div class="billing_details">
-        <div class="row">
-            <div class="col-lg-8">
-                <h3>Por favor, ingrese los datos</h3>
-                <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+<section class="checkout_area padding_top">
+    <div class="container">
+        <div class="billing_details">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Registro de producto</h3>
+                    <form class="row contact_form" novalidate="novalidate">
+                        <div class="col-md-12 form-group p_star">
+                            <select class="country_select">
+                                <option value="">Seleccione una categoría</option>
+                                <option [value]="categoria.id" *ngFor="let categoria of categorias">{{categoria.nombre}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" id="nombreProducto"
+                                placeholder="Nombre del Producto *" required />
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <textarea class="form-control" id="descripcionProducto" rows="1"
+                                placeholder="Descripción del Producto"></textarea>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-md-4 form-group p_star">
+                                    <input type="number" class="form-control" id="precioProducto"
+                                        placeholder="Precio base ($) *" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <label> Fecha Inicio </label>
+                            <input type="date" class="form-control" id="fechaInicio" />
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <label> Fecha Final </label>
+                            <input type="date" class="form-control" id="fechaFin" />
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <h3 class="mb-3">Fotos</h3>
+                            <div class="dropzone"></div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="">
+                                <input type="checkbox" id="f-option4" name="selector" />
+                                <label for="f-option4"> He leído los </label>
+                                <a>términos y condiciones*</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="btn_3" id="btnRegistrarProd"
+                            (click)="registrarProducto()">
+                                Registrar
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
-                    <div class="col-md-12 form-group p_star">
-                        <select id="dropdown_category" class="country_select">
-                            <option value="1">--Seleccione una categoría--</option>
-                            <option value="2">Entretenimiento</option>
-                            <option value="3">Libros</option>
-                            <option value="4">Musica</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12 form-group p_star">
-                        <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre del Producto *"
-                            required />
-                    </div>
-                    <div class="col-md-12 form-group">
-                        <textarea class="form-control" id="descripcionProducto" rows="1"
-                            placeholder="Descripción del Producto"></textarea>
-                    </div>
-                    <div class="col-md-4 form-group p_star">
-                        <input type="number" class="form-control" id="precioProducto" placeholder="Precio base ($) *"
-                            required />
-                    </div>
-                    <div class="col-md-8 form-group p_star">
-                    </div>
-                    <div class="col-md-4 form-group p_star">
-                        <input type="number" class="form-control" id="pujaProducto" placeholder="Monto mínimo ($) *"
-                            required />
-                    </div>
-                    <div class="col-md-8 form-group">
-                    </div>
-                    <div class="col-md-3 form-group p_star">
-                        <p>Fecha de Inicio</p>
-                    </div>
-                    <div class="col-md-4 form-group p_star">
-                        <input type="date" class="form-control" id="fechaInicio" />
-                    </div>
-                    <div class="col-md-5 form-group">
-                    </div>
-                    <div class="col-md-3 form-group p_star">
-                        <p>Fecha de Fin</p>
-                    </div>
-                    <div class="col-md-4 form-group p_star">
-                        <input type="date" class="form-control" id="fechaFin" />
-                    </div>
-                    <div class="col-md-5 form-group">
-                    </div>
-                    <div class="col-md-12 form-group">
-                        <p>Selecciona las imágenes del Producto (máximo 3)</p>
-                        <div id="divFileUpload">
-                            <input id="file-upload" type="file" accept="image/*" />
-                        </div>
-                        <div id="file-preview-zone">
+                <div class="col-lg-4 d-none d-lg-block d-xl-block">
+                    <div class="order_box" style="padding-left: 20px;padding-right: 20px;">
+                        <h2>Resumen de contacto</h2>
+                        <div class="col-lg-12 mt-4">
+                            <div class="media contact-info">
+                                <span class="contact-info__icon"><i class="ti-home"></i></span>
+                                <div class="media-body">
+                                    <h3 style="padding: 0;">Surco</h3>
+                                    <p style="font-size: 12px;">Lima</p>
+                                </div>
+                            </div>
+                            <div class="media contact-info">
+                                <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                                <div class="media-body">
+                                    <h3>957 355 738</h3>
+                                    <p style="line-height: 0;font-size: 12px;">Disponible L - V
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="media contact-info">
+                                <span class="contact-info__icon"><i class="ti-email"></i></span>
+                                <div class="media-body">
+                                    <p style="padding-top: 0px;">sebastianchicoma97@gmail.com</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-12 form-group">
-                        <button type="submit" value="submit" class="btn_3" id="btnRegistrarProd">
-                            Registrar
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <app-footer></app-footer>
-
-<script>
-    function readFile(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                var filePreview = document.createElement('img');
-                filePreview.id = 'file-preview';
-                //e.target.result contents the base64 data from the image uploaded
-                filePreview.src = e.target.result;
-                console.log(e.target.result);
-
-                var previewZone = document.getElementById('file-preview-zone');
-                previewZone.appendChild(filePreview);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    var fileUpload = document.getElementById('file-upload');
-    fileUpload.onchange = function (e) {
-        readFile(e.srcElement);
-    }
-
-</script>

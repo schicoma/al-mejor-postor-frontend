@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { environment } from '../environments/environment';
 
@@ -49,7 +50,7 @@ import { MustMatchDirective } from './directives/must-match.directive';
     PageNotFoundComponent,
     ProductDetailComponent,
     VerifyAccountComponent,
-    CreateProductComponent
+    CreateProductComponent,
     MustMatchDirective
   ],
   imports: [
@@ -58,7 +59,8 @@ import { MustMatchDirective } from './directives/must-match.directive';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
   providers: [
     AngularFirestore,

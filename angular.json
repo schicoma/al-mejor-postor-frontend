@@ -37,8 +37,10 @@
               "src/assets/css/themify-icons.css",
               "src/assets/css/magnific-popup.css",
               "src/assets/css/slick.css",
+              "src/assets/css/nice-select.css",
               "src/assets/css/price_rangs.css",
               "src/assets/css/lightslider.min.css",
+              "src/assets/css/dropzone.css",
               "src/assets/css/style.css"
             ],
             "scripts": [
@@ -57,7 +59,8 @@
               "src/assets/js/jquery.ajaxchimp.min.js",
               "src/assets/js/jquery.form.js",
               "src/assets/js/jquery.validate.min.js",
-              "src/assets/js/price_rangs.js"
+              "src/assets/js/price_rangs.js",
+              "src/assets/js/dropzone.js"
             ]
           },
           "configurations": {
