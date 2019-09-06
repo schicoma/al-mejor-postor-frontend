@@ -1,0 +1,101 @@
+<app-header></app-header>
+
+<!-- registrar producto form-->
+<div class="container padding_top">
+    <div class="billing_details">
+        <div class="row">
+            <div class="col-lg-8">
+                <h3>Por favor, ingrese los datos</h3>
+                <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+
+                    <div class="col-md-12 form-group p_star">
+                        <select id="dropdown_category" class="country_select">
+                            <option value="1">--Seleccione una categoría--</option>
+                            <option value="2">Entretenimiento</option>
+                            <option value="3">Libros</option>
+                            <option value="4">Musica</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 form-group p_star">
+                        <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre del Producto *"
+                            required />
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <textarea class="form-control" id="descripcionProducto" rows="1"
+                            placeholder="Descripción del Producto"></textarea>
+                    </div>
+                    <div class="col-md-4 form-group p_star">
+                        <input type="number" class="form-control" id="precioProducto" placeholder="Precio base ($) *"
+                            required />
+                    </div>
+                    <div class="col-md-8 form-group p_star">
+                    </div>
+                    <div class="col-md-4 form-group p_star">
+                        <input type="number" class="form-control" id="pujaProducto" placeholder="Monto mínimo ($) *"
+                            required />
+                    </div>
+                    <div class="col-md-8 form-group">
+                    </div>
+                    <div class="col-md-3 form-group p_star">
+                        <p>Fecha de Inicio</p>
+                    </div>
+                    <div class="col-md-4 form-group p_star">
+                        <input type="date" class="form-control" id="fechaInicio" />
+                    </div>
+                    <div class="col-md-5 form-group">
+                    </div>
+                    <div class="col-md-3 form-group p_star">
+                        <p>Fecha de Fin</p>
+                    </div>
+                    <div class="col-md-4 form-group p_star">
+                        <input type="date" class="form-control" id="fechaFin" />
+                    </div>
+                    <div class="col-md-5 form-group">
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <p>Selecciona las imágenes del Producto (máximo 3)</p>
+                        <div id="divFileUpload">
+                            <input id="file-upload" type="file" accept="image/*" />
+                        </div>
+                        <div id="file-preview-zone">
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" value="submit" class="btn_3" id="btnRegistrarProd">
+                            Registrar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+<script>
+    function readFile(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var filePreview = document.createElement('img');
+                filePreview.id = 'file-preview';
+                //e.target.result contents the base64 data from the image uploaded
+                filePreview.src = e.target.result;
+                console.log(e.target.result);
+
+                var previewZone = document.getElementById('file-preview-zone');
+                previewZone.appendChild(filePreview);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    var fileUpload = document.getElementById('file-upload');
+    fileUpload.onchange = function (e) {
+        readFile(e.srcElement);
+    }
+
+</script>

@@ -6,6 +6,7 @@ import { CreateAccountComponent } from './components/views/create-account/create
 import { SearchComponent } from './components/views/search/search.component';
 import { PageNotFoundComponent } from './components/views/page-not-found/page-not-found.component';
 import { ProductDetailComponent } from './components/views/product-detail/product-detail.component';
+import { CreateProductComponent } from './components/views/create-product/create-product.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent
+  },
+  {
+    path: 'create-product',
+    component: CreateProductComponent
   },
   {
     path: 'product-detail',
