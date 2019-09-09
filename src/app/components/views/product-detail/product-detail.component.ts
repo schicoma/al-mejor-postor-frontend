@@ -1,7 +1,7 @@
 import '../../../../assets/js/lightslider.min.js'
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductosService } from 'src/app/services/productos.service.js';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto.js';
 import { CategoriasService } from 'src/app/services/categorias.service.js';
 import { AuthService } from 'src/app/services/core/auth.service.js';
@@ -44,6 +44,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   producto: Producto = new Producto();
 
   constructor(
+    private router: Router, 
     private activatedRouter: ActivatedRoute,
     private productosService: ProductosService,
     private ofertasService: OfertasService,
@@ -132,8 +133,13 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   }
 
   mostrarFormularioOfertarFn() {
-    this.cantidadAOfertar = this.producto.precioNuevo;
-    this.mostrarFormularioAOfertar = true;
+    if (this.uidUsuario) {
+      this.cantidadAOfertar = this.producto.precioNuevo;
+      this.mostrarFormularioAOfertar = true;
+    } else {
+      this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
+    }
+
   }
 
   async registrarOferta() {
