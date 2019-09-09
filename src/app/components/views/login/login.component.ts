@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/core/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private activatedRouter: ActivatedRoute
+    private activatedRouter: ActivatedRoute,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -34,13 +36,13 @@ export class LoginComponent implements OnInit {
     }).catch(error => {
       switch (error.code) {
         case 'auth/user-not-found': case 'auth/invalid-email': case 'auth/wrong-password':
-          alert('Credenciales incorrectas');
+          this.toastr.error('Credenciales incorrectas');
           break;
         case 'web/email-not-verified':
-          alert('Correo electrónico no verificado');
+          this.toastr.error('Correo electrónico no verificado');
           break;
         default:
-          alert('Ha ocurrido un error, inténtelo más tarde');
+          this.toastr.error('Ha ocurrido un error, inténtelo más tarde');
       }
     });
   }

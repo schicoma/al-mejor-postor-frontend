@@ -23,4 +23,12 @@ export class UsuariosService {
       token: usuario.token
     });
   }
+
+  obtenerUsuario(email: string) {
+    return this.firebase.collection('usuarios').doc(email);
+  }
+
+  actualizarUsuario(uidUsuario: string, data: any) {
+    return this.firebase.collection('usuarios').doc(uidUsuario).update(data);
+  }
 }

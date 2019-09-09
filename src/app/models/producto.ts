@@ -5,11 +5,12 @@ export class Producto {
     categoria: number = -1;
     nombre: string;
     descripcion: string;
-    fechaInicio: string;
-    fechaFin: string;
+    fechaInicio: any;
+    fechaFin: any;
     precio: number;
     imagenes: Array<string>;
     ofertas: Array<any>;
+    estado: string;
 
     precioAntiguo: number;
     precioNuevo: number;

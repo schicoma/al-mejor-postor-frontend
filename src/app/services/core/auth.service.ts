@@ -26,10 +26,6 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  obtenerUsuarioEnSesion() {
-    console.log(localStorage.getItem('user'));
-  }
-
   iniciarSesion(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }

@@ -5,6 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+ 
+import { ToastrModule } from 'ngx-toastr';
+
 //Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from "@angular/fire/auth";
@@ -37,6 +41,11 @@ import { MustMatchDirective } from './directives/must-match.directive';
 import { NiceSelectModule } from "ng-nice-select";
 import { TerminosYCondicionesComponent } from './components/views/terminos-y-condiciones/terminos-y-condiciones.component';
 import { CanActivateViaAuth } from './guards/can-activate-via-auth';
+import { FormatoFechaPipe } from './pipes/formato-fecha.pipe';
+import { CustomCurrencyPipe } from './pipes/custom-currency.pipe';
+import { DecimalPipe } from '@angular/common';
+import { MyOffersComponent } from './components/my-offers/my-offers.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +64,11 @@ import { CanActivateViaAuth } from './guards/can-activate-via-auth';
     VerifyAccountComponent,
     CreateProductComponent,
     MustMatchDirective,
-    TerminosYCondicionesComponent
+    TerminosYCondicionesComponent,
+    FormatoFechaPipe,
+    CustomCurrencyPipe,
+    MyOffersComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -65,14 +78,17 @@ import { CanActivateViaAuth } from './guards/can-activate-via-auth';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    NiceSelectModule
+    NiceSelectModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AngularFirestore,
     ProductService,
     UsuariosService,
     AuthService,
-    CanActivateViaAuth 
+    CanActivateViaAuth,
+    DecimalPipe
   ],
   bootstrap: [AppComponent]
 })

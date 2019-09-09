@@ -27,7 +27,10 @@
                 <div class="s_product_text">
                     <!--<h5>previous <span>|</span> next</h5>-->
                     <h3>{{producto.nombre}}</h3>
-                    <h2>S/ {{producto.precioNuevo}}</h2>
+                    <h2 *ngIf="producto.precioNuevo">
+                        {{producto.precioNuevo | customCurrency }} <small *ngIf="producto.precioAntiguo"
+                            class="old-price">{{producto.precioAntiguo | customCurrency }}</small>
+                    </h2>
                     <ul class="list">
                         <li *ngIf="mapaDeCategorias">
                             <a class="active" href="#" style="font-weight: 600">
@@ -39,10 +42,10 @@
                         </li>
                     -->
                         <li>
-                            <a href="#"> <span>Comienza el</span> : 04 de setiembre</a>
+                            <a href="#"> <span>Comienza el</span> : {{producto.fechaInicio?.toDate() | formatoFecha: 'DD/MM/YYYY'}}</a>
                         </li>
                         <li>
-                            <a href="#"> <span>Cierre</span> : 04 de setiembre</a>
+                            <a href="#"> <span>Cierre</span> : {{producto.fechaFin?.toDate() | formatoFecha: 'DD/MM/YYYY'}}</a>
                         </li>
                         <li class="mt-2">
                             <a href="#"> <i class="fa fa-map-marker-alt"></i> Lima</a>
@@ -52,13 +55,16 @@
                     <div class="card_area d-flex justify-content-between align-items-center"
                         *ngIf="!mostrarFormularioAOfertar && !esMiProductoOfertado">
                         <a href="javascript:void(0)" class="btn_3" (click)="mostrarFormularioOfertarFn()">OFERTAR</a>
+                   <!--
                         <a href="javascript:void(0)" class="like_us"> <i class="ti-heart"></i> </a>
+                -->
                     </div>
                     <div class="card_area d-flex align-items-center" *ngIf="mostrarFormularioAOfertar">
                         <div class="product_count">
                             <button class="number-decrement" (click)="restarCantidadAOfertar()"> <i
                                     class="ti-minus"></i></button>
-                            <input class="input-number" type="text" [value]="cantidadAOfertar" disabled="disabled">
+                            <input class="input-number" type="text" [value]="cantidadAOfertar | customCurrency "
+                                disabled="disabled">
                             <button class="number-increment" (click)="aumentarCantidadAOfertar()"> <i
                                     class="ti-plus"></i></button>
                         </div>
@@ -89,10 +95,56 @@
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="ofertas" role="tabpanel" aria-labelledby="ofertas-tab">
-
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center" scope="col">Fecha</th>
+                                <th class="text-left" scope="col">Usuario</th>
+                                <th class="text-right" scope="col">Precio Anterior</th>
+                                <th class="text-right" scope="col">Nuevo Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let ofertaObject of ofertas">
+                                <td class="text-center">{{ofertaObject.fecha?.toDate() | formatoFecha}}</td>
+                                <th scope="row" class="text-left">
+                                    <i class="fa fa-user"></i> {{ofertaObject.usuario.nombre}}
+                                </th>
+                                <td class="text-right">{{ofertaObject.precioAntiguo | customCurrency }}</td>
+                                <td class="text-right">{{ofertaObject.precioNuevo | customCurrency }}</td>
+                            </tr>
+                            <tr *ngIf="!ofertas?.length">
+                               <td colspan="4">
+                                    Aún no hay ofertas para este producto
+                               </td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="tab-pane fade" id="contacto" role="tabpanel" aria-labelledby="contacto-tab">
-
+                <div class="col-lg-8 col-lx-4">
+                    <div class="confirmation_part">
+                        <div class="single_confirmation_details">
+                            <h4>Resumen de contacto</h4>
+                            <ul>
+                                <li>
+                                    <p>Nombres</p><span>: Sebastian</span>
+                                </li>
+                                <li>
+                                    <p>Apellidos</p><span>: Chicoma</span>
+                                </li>
+                                <li>
+                                    <p>Email</p><span>: sebastianchicoma97@gmail.com</span>
+                                </li>
+                                <li>
+                                    <p>Teléfono</p><span>: 999777666</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

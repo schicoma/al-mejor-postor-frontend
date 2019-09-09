@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from 'src/app/services/core/auth.service';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 
 @Component({
@@ -11,7 +12,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   estaElUsuarioEnSesion: boolean;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -40,7 +42,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   mostrarUsuario() {
-    alert("Bienvenido " + this.authService.usuario.email);
+    this.toastr.success('Bienvenido ' + this.authService.usuario.email);
   }
 
 }

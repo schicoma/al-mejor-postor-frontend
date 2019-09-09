@@ -14,13 +14,13 @@
 <section class="checkout_area padding_top">
     <div class="container">
         <div class="billing_details">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <h3>Registro de producto</h3>
                     <form class="row contact_form" novalidate="novalidate" (ngSubmit)="registrarProducto(myForm)"
                         #myForm="ngForm">
                         <div class="col-md-12 form-group p_star">
-                            <select nice-select (change)="onChange($event)" [value]="producto.categoria"
+                            <select nice-select [value]="producto.categoria"
                                 [attr.data-value]="producto.categoria" [(ngModel)]="producto.categoria" name="categoria"
                                 #categoria="ngModel" required="required">
                                 <option value="-1" disabled> Seleccione una categoría</option>
@@ -58,9 +58,10 @@
                                 <div class="col-md-4 form-group p_star">
                                     <input type="number" class="form-control" id="precioProducto" name="precioProducto"
                                         [(ngModel)]="producto.precio" placeholder="Precio base ($) *" required
-                                        #precioProducto="ngModel" />
+                                        #precioProducto="ngModel" pattern="^\d+(?:[,.]\d+)?$" />
                                     <div *ngIf="myForm.submitted && precioProducto.invalid" class="invalid-message">
                                         <span *ngIf="precioProducto.errors.required">Campo requerido</span>
+                                        <span *ngIf="precioProducto.errors.pattern">El valor no es un expresión numérica correcta</span>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +109,7 @@
                         </div>
                     </form>
                 </div>
-
+<!--
                 <div class="col-lg-4 d-none d-lg-block d-xl-block">
                     <div class="order_box" style="padding-left: 20px;padding-right: 20px;">
                         <h2>Resumen de contacto</h2>
@@ -137,6 +138,7 @@
                         </div>
                     </div>
                 </div>
+            -->
             </div>
         </div>
     </div>

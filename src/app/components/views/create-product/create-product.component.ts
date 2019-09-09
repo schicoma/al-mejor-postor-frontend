@@ -1,10 +1,17 @@
 import { Component, OnInit, AfterViewInit, AfterContentInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-import * as uuid from 'uuid';
 import { ProductosService } from 'src/app/services/productos.service';
 import { Producto } from 'src/app/models/producto';
 import { AuthService } from 'src/app/services/core/auth.service';
 import { Router } from '@angular/router';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import * as uuid from 'uuid';
+import * as moment from 'moment';
+import { CategoriasService } from 'src/app/services/categorias.service';
+import { take } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { Alert } from 'selenium-webdriver';
+
 declare var $: any;
 declare var Dropzone: any;
 
@@ -26,37 +33,34 @@ export class CreateProductComponent implements OnInit, AfterContentInit {
     private router: Router,
     private afStorage: AngularFireStorage,
     private authService: AuthService,
-    private productosService: ProductosService
+    private productosService: ProductosService,
+    private toastr: ToastrService,
+    private categoriasService: CategoriasService
   ) { }
 
   ngOnInit() {
     Dropzone.autoDiscover = false;
 
-    this.categorias = [
-      { id: 1, nombre: 'Juguetes' },
-      { id: 2, nombre: 'Figuras de acción' },
-      { id: 3, nombre: 'Videojuegos' }
-    ];
+    this.categoriasService.obtenerCategorias().valueChanges().pipe(take(1)).subscribe((respuesta) => {
+      this.categorias = respuesta;
+    });
 
     this.producto = new Producto()
   }
 
   ngAfterContentInit(): void {
-    //Called after ngOnInit when the component's or directive's content has been initialized.
-    //Add 'implements AfterContentInit' to the class.
     setTimeout(() => {
-      $('.nice_select').niceSelect();
-
-      this.myDropzone = new Dropzone("div.dropzone", { url: "/file/post", addRemoveLinks: true });
+      this.myDropzone = new Dropzone("div.dropzone", {
+        url: "/file/post",
+        addRemoveLinks: true,
+        acceptedFiles: "image/jpeg,image/png"
+      });
     });
 
   }
 
-  onChange(event) {
-    console.log(event);
-  }
-
   async registrarProducto(form) {
+
     this.errorImagenesRequerido = false;
 
     if (!this.myDropzone.files.length) {
@@ -66,13 +70,35 @@ export class CreateProductComponent implements OnInit, AfterContentInit {
     if (form.valid && !this.errorImagenesRequerido) {
 
       if (!this.aceptarTerminosYCondiciones) {
-        alert('Debe aceptar los términos y condiciones')
+        this.toastr.error('Debe aceptar los términos y condiciones')
+        return;
+      }
+
+      // Validar fechas      
+      let fechaInicio = moment(this.producto.fechaInicio, 'YYYY-MM-DD').startOf('day');
+      let fechaFin = moment(this.producto.fechaFin, 'YYYY-MM-DD').startOf('day');
+
+      if (fechaInicio.isSame(fechaFin)) {
+        // Fechas nos deben ser iguales
+        this.toastr.error('Las fechas elegidas no deben ser iguales');
+        return;
+      } else if (fechaFin.isBefore(fechaInicio)) {
+        this.toastr.error('Las fecha fin no debe ser menor que la fecha de inicio');
+        return;
+      } else if (fechaInicio.isBefore(moment().startOf('day'))) {
+        // Fecha no debe ser menor que hoy
+        this.toastr.error('La fecha inicio no debe ser menor a la fecha de hoy');
         return;
       }
 
       this.loading = true;
 
-      this.producto.imagenes = [];
+      const producto = { ...this.producto };
+
+      producto.fechaInicio = fechaInicio.toDate();
+      producto.fechaFin = fechaFin.toDate();
+      producto.estado = 'C';
+      producto.imagenes = [];
 
       for (const file of this.myDropzone.files) {
 
@@ -83,13 +109,14 @@ export class CreateProductComponent implements OnInit, AfterContentInit {
         let url = await ref.getDownloadURL().toPromise();
 
         // Guardando referencias de imagenes
-        this.producto.imagenes.push(url);
+        producto.imagenes.push(url);
 
       }
 
-      this.productosService.guardarProducto(this.authService.usuario.uid, this.producto)
+      this.productosService.guardarProducto(this.authService.usuario.uid, producto)
         .then((respuesta) => {
-          console.log(respuesta);
+          this.toastr.success('Producto creado correctamente');
+
           this.router.navigate(['/product-detail', respuesta.id]);
         })
         .finally(() => {

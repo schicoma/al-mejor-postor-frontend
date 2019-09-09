@@ -1,4 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { ProductosService } from 'src/app/services/productos.service';
+import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
@@ -6,8 +8,10 @@ declare var $: any;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
-
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+  best_product_slider: any;
+  productos: Array<any>;
+  suscription: Subscription;
   timeInterval: any;
 
   dias: any;
@@ -15,10 +19,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
   minutos: any;
   segundos: any;
 
-  ngAfterViewInit(): void {
-    var best_product_slider = $('.best_product_slider');
-    if (best_product_slider.length) {
-      best_product_slider.owlCarousel({
+  inicializarSliderImagenes() {
+    if (this.best_product_slider) {
+      $('.best_product_slider').load('', function () {
+        $('.best_product_slider').trigger('destroy.owl.carousel');
+        this.best_product_slider = $('.best_product_slider').owlCarousel({
+          items: 1,
+          margin: 10,
+          nav: false
+        });
+        return false;
+      });
+      return;
+    }
+
+    this.best_product_slider = $('.best_product_slider');
+
+    if (this.best_product_slider.length) {
+      this.best_product_slider.owlCarousel({
         items: 4,
         loop: true,
         dots: false,
@@ -51,64 +69,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
       });
     }
+  }
 
-    //product list slider
-    var product_list_slider = $('.product_list_slider');
-    if (product_list_slider.length) {
-      product_list_slider.owlCarousel({
-        items: 1,
-        loop: true,
-        dots: false,
-        autoplay: true,
-        autoplayHoverPause: true,
-        autoplayTimeout: 5000,
-        nav: true,
-        navText: ["next", "previous"],
-        smartSpeed: 1000,
-        responsive: {
-          0: {
-            margin: 15,
-            nav: false,
-            items: 1
-          },
-          600: {
-            margin: 15,
-            items: 1,
-            nav: false
-          },
-          768: {
-            margin: 30,
-            nav: true,
-            items: 1
-          }
-        }
-      });
-    }
-
-    //single banner slider
-    // var banner_slider = $('.banner_slider');
-    // if (banner_slider.length) {
-    //   banner_slider.owlCarousel({
-    //     items: 1,
-    //     loop: true,
-    //     dots: false,
-    //     autoplay: true,
-    //     autoplayHoverPause: true,
-    //     autoplayTimeout: 5000,
-    //     nav: true,
-    //     navText: ["next","previous"],
-    //     smartSpeed: 1000,
-    //   });
-    // }
-
-    if ($('.img-gal').length > 0) {
+  ngAfterViewInit(): void {
+    /*if ($('.img-gal').length > 0) {
       $('.img-gal').magnificPopup({
         type: 'image',
         gallery: {
           enabled: true
         }
       });
-    }
+    }*/
 
 
     //single banner slider
@@ -141,7 +112,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
       }
     });
- 
+
     this.timeInterval = setInterval(() => {
       //		var endTime = new Date("29 April 2018 9:56:00 GMT+01:00");	
       let endTime = new Date("04 Sep 2019 12:56:00 GMT+05:00");
@@ -165,13 +136,34 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   }
 
-  constructor() { }
+  constructor(
+    private productosService: ProductosService
+  ) { }
 
   ngOnInit() {
+
+    this.suscription = this.productosService.listarUltimos5Productos().snapshotChanges().subscribe((respuesta) => {
+      this.productos = [];
+
+      respuesta.forEach(element => {
+        let x: any = element.payload.doc.data();
+        x.uid = element.payload.doc.id;
+        
+        this.productos.push(x);
+      });
+
+      setTimeout(() => {
+        this.inicializarSliderImagenes();
+      });
+
+    });
+
   }
 
   ngOnDestroy() {
     clearInterval(this.timeInterval);
+
+    this.suscription.unsubscribe();
   }
 
 }

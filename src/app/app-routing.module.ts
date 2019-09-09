@@ -8,6 +8,8 @@ import { PageNotFoundComponent } from './components/views/page-not-found/page-no
 import { ProductDetailComponent } from './components/views/product-detail/product-detail.component';
 import { CreateProductComponent } from './components/views/create-product/create-product.component';
 import { CanActivateViaAuth } from './guards/can-activate-via-auth';
+import { MyOffersComponent } from './components/my-offers/my-offers.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,11 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'my-profile',
+    component: MyProfileComponent,
+    canActivate: [CanActivateViaAuth]
   },
   {
     path: 'create-account',
@@ -39,6 +46,11 @@ const routes: Routes = [
   {
     path: 'product-detail/:id',
     component: ProductDetailComponent
+  },
+  {
+    path: 'my-offers',
+    component: MyOffersComponent,
+    canActivate: [CanActivateViaAuth]
   },
   {
     path: 'page-not-found',

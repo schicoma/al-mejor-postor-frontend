@@ -23,6 +23,10 @@ export class OfertasService {
   }
 
   obtenerOfertasPorProducto(uidProducto: string) {
-    return this.firebase.collection('ofertas', ref => ref.where('product.id', '==', uidProducto));
+    return this.firebase.collection('ofertas', ref => ref.where('producto.uid', '==', uidProducto).orderBy('fecha', 'desc'));
+  }
+
+  obtenerOfertasPorUsuario(uidUsuario: string) {
+    return this.firebase.collection('ofertas', ref => ref.where('usuario.uid', '==', uidUsuario).orderBy('fecha', 'desc'));
   }
 }

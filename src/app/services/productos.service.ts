@@ -39,4 +39,11 @@ export class ProductosService {
     return this.firebase.collection('productos').doc(id).snapshotChanges();
   }
 
+  listarUltimos5Productos() {
+    return this.firebase.collection('productos', ref => ref.orderBy('fechaInicio', 'desc').limit(5));
+  }
+
+  listarProductos() {
+    return this.firebase.collection('productos', ref => ref.orderBy('fechaInicio', 'desc').limit(5));
+  }
 }

@@ -14,7 +14,7 @@ export class CategoriasService {
     private firestore: AngularFirestore
   ) { }
 
-  private obtenerCategorias(): AngularFirestoreCollection {
+  obtenerCategorias(): AngularFirestoreCollection {
     return this.firestore.collection('categorias');
   }
 

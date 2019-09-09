@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import '../../../../assets/js/lightslider.min.js'
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductosService } from 'src/app/services/productos.service.js';
 import { ActivatedRoute } from '@angular/router';
 import { Producto } from 'src/app/models/producto.js';
 import { CategoriasService } from 'src/app/services/categorias.service.js';
 import { AuthService } from 'src/app/services/core/auth.service.js';
-import * as uuid from 'uuid';
 import { Oferta } from 'src/app/models/oferta';
-import * as firebase from 'firebase/app';
-import '../../../../assets/js/lightslider.min.js'
 import { OfertasService } from 'src/app/services/ofertas.service.js';
+import { UsuariosService } from 'src/app/services/usuarios.service.js';
+import { take } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import * as uuid from 'uuid';
+import * as firebase from 'firebase/app';
+import { Subscription } from 'rxjs';
 
 declare var $: any;
 
@@ -17,15 +21,19 @@ declare var $: any;
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnDestroy {
 
   cantidadAOfertar: number;
   loading = true;
   mapaDeCategorias: any;
   mostrarFormularioAOfertar: boolean;
+  ofertas: Array<any>;
+  ofertasSubscription: Subscription;
   product_overview: any;
+  productoSubscription: Subscription;
   uidProducto: string;
   uidUsuario: string;
+  usuarioDB: any;
 
   /*
   * Esta variable sirve para saber si el producto que se muestra es un producto que ha sido registrado
@@ -40,14 +48,28 @@ export class ProductDetailComponent implements OnInit {
     private productosService: ProductosService,
     private ofertasService: OfertasService,
     private categoriasService: CategoriasService,
-    private authService: AuthService
+    private authService: AuthService,
+    private usuarioService: UsuariosService,
+    private toastr: ToastrService
   ) { }
 
+  ngOnDestroy(): void {
+    this.ofertasSubscription.unsubscribe();
+    this.productoSubscription.unsubscribe();
+  }
+
   ngOnInit() {
+    window.scroll(0, 0);
 
     const usuarioEnSesion = this.authService.estaElUsuarioEnSesion();
     if (usuarioEnSesion) {
       this.uidUsuario = this.authService.usuario.uid;
+
+      this.usuarioService.obtenerUsuario(this.authService.usuario.email).valueChanges().pipe(take(1))
+        .subscribe((usuario) => {
+          this.usuarioDB = usuario;
+        });
+
     } else {
 
     }
@@ -58,7 +80,7 @@ export class ProductDetailComponent implements OnInit {
       id = 'not-found';
     }
 
-    this.productosService.obtenerProductoSnapshotChanges(id).subscribe((next) => {
+    this.productoSubscription = this.productosService.obtenerProductoSnapshotChanges(id).subscribe((next) => {
       if (next.payload.exists) {
         this.uidProducto = next.payload.id;
         const productoFromDB: any = next.payload.data();
@@ -71,6 +93,19 @@ export class ProductDetailComponent implements OnInit {
 
         if (this.uidUsuario === productoFromDB.usuario.uid) {
           this.esMiProductoOfertado = true;
+        }
+
+        if (!this.ofertas) {
+          this.ofertasSubscription = this.ofertasService.obtenerOfertasPorProducto(id).snapshotChanges().subscribe((ofertas) => {
+            this.ofertas = [];
+
+            ofertas.forEach(element => {
+              let x = element.payload.doc.data();
+              //x['$key'] = element.payload.doc.id;
+
+              this.ofertas.push(x);
+            });
+          });
         }
 
         setTimeout(() => {
@@ -103,6 +138,11 @@ export class ProductDetailComponent implements OnInit {
 
   async registrarOferta() {
 
+    if (this.cantidadAOfertar <= this.producto.precioNuevo) {
+      this.toastr.warning('Verifique que el precio a ofertar sea mayor al nuevo precio', 'El precio ha cambiado');
+      return;
+    }
+
     this.loading = true;
 
     const uidOferta = uuid.v4();
@@ -117,16 +157,18 @@ export class ProductDetailComponent implements OnInit {
 
     oferta.usuario = {
       uid: this.uidUsuario,
-      nombre: ''
+      nombre: `${this.usuarioDB.nombres} ${this.usuarioDB.apellidos}`
     };
 
     oferta.producto = {
-      uid: this.uidProducto
+      uid: this.uidProducto,
+      nombre: this.producto.nombre,
+      categoria: this.producto.categoria,
     };
 
     // //Actualizando producto
 
-    this.producto.precioAntiguo = this.producto.precio;
+    this.producto.precioAntiguo = this.producto.precioNuevo;
     this.producto.precioNuevo = this.cantidadAOfertar;
 
     if (!this.producto.ofertas) {
@@ -140,6 +182,7 @@ export class ProductDetailComponent implements OnInit {
     await this.ofertasService.guardarOferta(oferta);
     this.productosService.actualizarProducto(this.uidProducto, this.producto).then(() => {
       this.mostrarFormularioAOfertar = false;
+      this.toastr.success('La oferta fue registrada correctamente');
       this.loading = false;
     });
   }
