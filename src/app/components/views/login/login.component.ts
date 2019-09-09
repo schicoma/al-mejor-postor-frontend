@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/core/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { throwError } from 'rxjs';
 
 @Component({
@@ -11,19 +11,23 @@ import { throwError } from 'rxjs';
 export class LoginComponent implements OnInit {
 
   credenciales: any = {};
+  returnUrl: string;
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private activatedRouter: ActivatedRoute
   ) { }
 
   ngOnInit() {
+
+    this.returnUrl = this.activatedRouter.snapshot.queryParams['returnUrl'] || '/search';
   }
 
   iniciarSesion() {
     this.authService.iniciarSesion(this.credenciales.email, this.credenciales.password).then(value => {
       if (value.user.emailVerified) {
-        this.router.navigate(['/search']);
+        this.router.navigate([this.returnUrl]);
       } else {
         throw ({ code: 'web/email-not-verified' });
       }

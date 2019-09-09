@@ -34,6 +34,9 @@ import { AuthService } from './services/core/auth.service';
 import { VerifyAccountComponent } from './components/views/verify-account/verify-account.component';
 import { CreateProductComponent } from './components/views/create-product/create-product.component';
 import { MustMatchDirective } from './directives/must-match.directive';
+import { NiceSelectModule } from "ng-nice-select";
+import { TerminosYCondicionesComponent } from './components/views/terminos-y-condiciones/terminos-y-condiciones.component';
+import { CanActivateViaAuth } from './guards/can-activate-via-auth';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,8 @@ import { MustMatchDirective } from './directives/must-match.directive';
     ProductDetailComponent,
     VerifyAccountComponent,
     CreateProductComponent,
-    MustMatchDirective
+    MustMatchDirective,
+    TerminosYCondicionesComponent
   ],
   imports: [
     BrowserModule,
@@ -60,13 +64,15 @@ import { MustMatchDirective } from './directives/must-match.directive';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    NiceSelectModule
   ],
   providers: [
     AngularFirestore,
     ProductService,
     UsuariosService,
-    AuthService
+    AuthService,
+    CanActivateViaAuth 
   ],
   bootstrap: [AppComponent]
 })

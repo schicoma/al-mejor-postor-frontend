@@ -12,19 +12,31 @@ export class ProductosService {
     private firebase: AngularFirestore
   ) { }
 
-  guardarProducto(usuario: Usuario, producto: Producto) {
+  actualizarProducto(uidProducto: string, datosActualizados: any) {
+    return this.firebase.collection('productos').doc(uidProducto).set(datosActualizados);
+  }
+
+  guardarProducto(uidUsuario: string, producto: Producto) {
     return this.firebase.collection('productos').add({
+      categoria: producto.categoria,
       nombre: producto.nombre,
       descripcion: producto.descripcion,
       precio: producto.precio,
       fechaInicio: producto.fechaInicio,
       fechaFin: producto.fechaFin,
+      imagenes: producto.imagenes,
       usuario: {
-        nombre: usuario.nombres,
-        apellido: usuario.apellidos,
-        uid: usuario.uid
+        uid: uidUsuario
       }
     });
+  }
+
+  obtenerProducto(id: string) {
+    return this.firebase.collection('productos').doc(id).get();
+  }
+
+  obtenerProductoSnapshotChanges(id: string) {
+    return this.firebase.collection('productos').doc(id).snapshotChanges();
   }
 
 }

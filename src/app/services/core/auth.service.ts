@@ -26,6 +26,10 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
+  obtenerUsuarioEnSesion() {
+    console.log(localStorage.getItem('user'));
+  }
+
   iniciarSesion(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
@@ -39,7 +43,14 @@ export class AuthService {
 
   estaElUsuarioEnSesion() {
     const usuario = JSON.parse(localStorage.getItem('user'));
-    return usuario != null
+
+    const estaElUsuarioEnSesion = usuario !== undefined && usuario !== null;
+
+    if (estaElUsuarioEnSesion && !this.usuario) {
+      this.usuario = usuario;
+    }
+
+    return estaElUsuarioEnSesion;
   }
 
 }

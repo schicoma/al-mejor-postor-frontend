@@ -35,6 +35,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   }
 
+  logout() {
+    this.authService.salirSesion();
+  }
+
   mostrarUsuario() {
     alert("Bienvenido " + this.authService.usuario.email);
   }

@@ -164,11 +164,6 @@
 
 
 
-  // niceSelect js code
-  $(document).ready(function () {
-    $('select').niceSelect();
-  });
-
   // menu fixed js code
   // $(window).scroll(function () {
   //   var window_top = $(window).scrollTop() + 1;
@@ -230,39 +225,6 @@
   }
   mailChimp();
 
-  //------- makeTimer js --------//  
-  function makeTimer() {
-
-    //		var endTime = new Date("29 April 2018 9:56:00 GMT+01:00");	
-    var endTime = new Date("27 Sep 2019 12:56:00 GMT+01:00");
-    endTime = (Date.parse(endTime) / 1000);
-
-    var now = new Date();
-    now = (Date.parse(now) / 1000);
-
-    var timeLeft = endTime - now;
-
-    var days = Math.floor(timeLeft / 86400);
-    var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
-    var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
-    var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
-
-    if (hours < "10") {
-      hours = "0" + hours;
-    }
-    if (minutes < "10") {
-      minutes = "0" + minutes;
-    }
-    if (seconds < "10") {
-      seconds = "0" + seconds;
-    }
-
-    $("#days").html("<span>Days</span>" + days);
-    $("#hours").html("<span>Hours</span>" + hours);
-    $("#minutes").html("<span>Minutes</span>" + minutes);
-    $("#seconds").html("<span>Seconds</span>" + seconds);
-
-  }
 // click counter js
 (function() {
  
@@ -323,36 +285,6 @@ inputNumber($('.input-number'));
   //   console.log(  $(this).innerHTML='Product Count: '+ a++ );
   // });
 
- var product_overview = $('#vertical');
- if(product_overview.length){
-  product_overview.lightSlider({
-    gallery:true,
-    item:1,
-    vertical:true,
-    verticalHeight:450,
-    thumbItem:3,
-    slideMargin:0,
-    speed:600,
-    autoplay: true,
-    responsive : [
-      {
-          breakpoint:991,
-          settings: {
-              item:1,
-              
-            }
-      },
-      {
-          breakpoint:576,
-          settings: {
-              item:1,
-              slideMove:1,
-              verticalHeight:350,
-            }
-      }
-  ]
-  });  
- }
     
 
 

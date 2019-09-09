@@ -7,6 +7,7 @@ import { SearchComponent } from './components/views/search/search.component';
 import { PageNotFoundComponent } from './components/views/page-not-found/page-not-found.component';
 import { ProductDetailComponent } from './components/views/product-detail/product-detail.component';
 import { CreateProductComponent } from './components/views/create-product/create-product.component';
+import { CanActivateViaAuth } from './guards/can-activate-via-auth';
 
 const routes: Routes = [
   {
@@ -32,10 +33,11 @@ const routes: Routes = [
   },
   {
     path: 'create-product',
-    component: CreateProductComponent
+    component: CreateProductComponent,
+    canActivate: [CanActivateViaAuth]
   },
   {
-    path: 'product-detail',
+    path: 'product-detail/:id',
     component: ProductDetailComponent
   },
   {

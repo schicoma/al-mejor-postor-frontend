@@ -7,6 +7,9 @@ declare var $: any;
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
+
+  timeInterval: any;
+
   dias: any;
   horas: any;
   minutos: any;
@@ -138,9 +141,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
       }
     });
-
-    function makeTimer() {
-
+ 
+    this.timeInterval = setInterval(() => {
       //		var endTime = new Date("29 April 2018 9:56:00 GMT+01:00");	
       let endTime = new Date("04 Sep 2019 12:56:00 GMT+05:00");
       let endTimeNumber = (endTime.getTime() / 1000);
@@ -159,11 +161,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.horas = (hours < 10 ? "0" + hours : hours);
       this.minutos = (minutes < 10 ? "0" + minutes : minutes);
       this.segundos = (seconds < 10 ? "0" + seconds : seconds);
-
-    }
-
-    setInterval(function () {
-      makeTimer();
     }, 1000);
 
   }
@@ -171,6 +168,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.timeInterval);
   }
 
 }
