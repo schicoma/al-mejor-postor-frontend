@@ -12,7 +12,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script :: Un saludo
+    - name: Run a one-line script Un saludo
       run: echo Hola mundo, estoy usando Github Actions!
     - name: Run a multi-line script: 'Otro saludo multilinea'
       run: |
