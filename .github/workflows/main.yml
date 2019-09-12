@@ -12,6 +12,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
     - name: Run a one-line script
       run: echo Hola mundo, estoy usando Github Actions!
     - name: Run a multi-line script
