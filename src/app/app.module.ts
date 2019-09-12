@@ -6,25 +6,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
- 
 import { ToastrModule } from 'ngx-toastr';
-
-//Firebase
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from "@angular/fire/auth";
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { NiceSelectModule } from "ng-nice-select";
 
 import { environment } from '../environments/environment';
 
-//Components
-import { ProductsComponent } from './components/products/products.component';
-import { ProductListComponent } from './components/products/product-list/product-list.component';
-import { ProductComponent } from './components/products/product/product.component';
+// Firebase
 
-//Services
-import { ProductService } from './services/product.service';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/firestore';
+
+// Services
+import { UsuariosService } from './services/usuarios.service';
+import { AuthService } from './services/core/auth.service';
+import { ProductosService } from './services/productos.service';
+import { CategoriasService } from './services/categorias.service';
+import { OfertasService } from './services/ofertas.service';
+
+import { CanActivateViaAuth } from './guards/can-activate-via-auth';
+
+// Components
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -33,26 +37,22 @@ import { CreateAccountComponent } from './components/views/create-account/create
 import { SearchComponent } from './components/views/search/search.component';
 import { PageNotFoundComponent } from './components/views/page-not-found/page-not-found.component';
 import { ProductDetailComponent } from './components/views/product-detail/product-detail.component';
-import { UsuariosService } from './services/usuarios.service';
-import { AuthService } from './services/core/auth.service';
 import { VerifyAccountComponent } from './components/views/verify-account/verify-account.component';
 import { CreateProductComponent } from './components/views/create-product/create-product.component';
-import { MustMatchDirective } from './directives/must-match.directive';
-import { NiceSelectModule } from "ng-nice-select";
 import { TerminosYCondicionesComponent } from './components/views/terminos-y-condiciones/terminos-y-condiciones.component';
-import { CanActivateViaAuth } from './guards/can-activate-via-auth';
+import { MyOffersComponent } from './components/my-offers/my-offers.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+
+// Pipes
 import { FormatoFechaPipe } from './pipes/formato-fecha.pipe';
 import { CustomCurrencyPipe } from './pipes/custom-currency.pipe';
 import { DecimalPipe } from '@angular/common';
-import { MyOffersComponent } from './components/my-offers/my-offers.component';
-import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { MustMatchDirective } from './directives/must-match.directive';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductsComponent,
-    ProductListComponent,
-    ProductComponent,
     HomeComponent,
     FooterComponent,
     HeaderComponent,
@@ -75,17 +75,19 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    AngularFirestoreModule,
     NiceSelectModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
   providers: [
     AngularFirestore,
-    ProductService,
     UsuariosService,
+    ProductosService,
+    CategoriasService,
+    OfertasService,
     AuthService,
     CanActivateViaAuth,
     DecimalPipe

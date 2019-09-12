@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.activatedRouter.snapshot.queryParams['returnUrl'] || '/search';
   }
 
-  iniciarSesion() {
+  iniciarSesion(myForm) {
     this.authService.iniciarSesion(this.credenciales.email, this.credenciales.password).then(value => {
       if (value.user.emailVerified) {
         this.router.navigate([this.returnUrl]);
