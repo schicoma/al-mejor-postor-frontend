@@ -12,10 +12,9 @@ jobs:
     
     steps:
     - uses: actions/checkout@master
-    - name: Run a one-line script
-      run: echo Hola mundo, estoy usando Github Actions!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-        echo By @schicoma
+    - name: Descargando dependencias
+      run: npm install
+    - name: Creando carpeta dist
+      run: ng build --prod
+    - name: Deployando en firebase
+      run: firebase deploy
