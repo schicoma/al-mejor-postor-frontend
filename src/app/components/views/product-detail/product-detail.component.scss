@@ -24,5 +24,42 @@
 }
 
 .product_description_area {
-    margin-top: 30px;
+  margin-top: 30px;
+}
+
+.product_count {
+  width: 50%;
+  text-align: center;
+  display: block;
+}
+
+.input-number {
+  width: 60% !important;
+  background: white !important;
+}
+
+.card_area.d-flex > div,
+.card_area.d-flex > a {
+  margin-right: 10px !important;
+}
+
+.number-decrement,
+.number-increment {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.confirmation_part .single_confirmation_details ul li {
+  padding-left: 30%;
+}
+
+.product_description_area .tab-content .table tbody tr td {
+  padding: 0.75rem;
+}
+
+.old-price {
+  color: gray;
+  text-decoration: line-through;
+  font-size: initial;
 }

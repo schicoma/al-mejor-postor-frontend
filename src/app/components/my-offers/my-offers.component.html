@@ -1,0 +1,51 @@
+<app-header></app-header>
+
+<div class="loading" *ngIf="loading">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+
+<section class="sample-text-area">
+    <div class="container box_1170">
+        <h3 class="text-heading">Mis ofertas</h3>
+        <div class="table-responsive">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Fecha</th>
+                        <th class="text-left" scope="col">Producto</th>
+                        <th class="text-left" scope="col">Estado</th>
+                        <th class="text-right" scope="col">Precio Anterior</th>
+                        <th class="text-right" scope="col">Nuevo Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ofertaObject of ofertas">
+                        <td class="text-center">{{ofertaObject.fecha.toDate() | formatoFecha}}</td>
+                        <th scope="row" class="text-left">
+                            <a [routerLink]="['/product-detail', ofertaObject.producto.uid]"> 
+                                {{ofertaObject.producto.nombre}}
+                            </a>
+                        </th>
+                        <td class="text-center">
+                            <b>{{mapaDeCategorias[ofertaObject.producto.categoria]}}</b>
+                        </td>
+                        <td class="text-right">{{ofertaObject.precioAntiguo | customCurrency }}</td>
+                        <td class="text-right">{{ofertaObject.precioNuevo | customCurrency }}</td>
+                    </tr>
+                    <tr *ngIf="!ofertas?.length">
+                        <td colspan="5">No hay ofertas realizadas</td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

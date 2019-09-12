@@ -1,0 +1,129 @@
+[debug] [2019-09-06T05:32:35.655Z] ----------------------------------------------------------------------
+[debug] [2019-09-06T05:32:35.657Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase serve -o 0.0.0.0
+[debug] [2019-09-06T05:32:35.657Z] CLI Version:   7.3.0
+[debug] [2019-09-06T05:32:35.657Z] Platform:      linux
+[debug] [2019-09-06T05:32:35.657Z] Node Version:  v10.16.0
+[debug] [2019-09-06T05:32:35.658Z] Time:          Fri Sep 06 2019 00:32:35 GMT-0500 (GMT-05:00)
+[debug] [2019-09-06T05:32:35.658Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-06T05:32:35.665Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-06T05:32:35.665Z] > authorizing via signed-in user
+[debug] [2019-09-06T05:32:35.666Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get"]
+[debug] [2019-09-06T05:32:35.667Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-09-06T05:32:35.668Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-09-06T05:32:42.166Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-06T05:32:42.234Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angular-crud-firebase-9d4e9:testIamPermissions  
+
+[debug] [2019-09-06T05:32:42.670Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-06T05:32:42.673Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9  
+ 
+[debug] [2019-09-06T05:32:46.504Z] ----------------------------------------------------------------------
+[debug] [2019-09-06T05:32:46.507Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase serve -o 0.0.0.0
+[debug] [2019-09-06T05:32:46.507Z] CLI Version:   7.3.0
+[debug] [2019-09-06T05:32:46.507Z] Platform:      linux
+[debug] [2019-09-06T05:32:46.507Z] Node Version:  v10.16.0
+[debug] [2019-09-06T05:32:46.508Z] Time:          Fri Sep 06 2019 00:32:46 GMT-0500 (GMT-05:00)
+[debug] [2019-09-06T05:32:46.508Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-06T05:32:46.518Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-06T05:32:46.518Z] > authorizing via signed-in user
+[debug] [2019-09-06T05:32:46.518Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get"]
+[debug] [2019-09-06T05:32:46.521Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angular-crud-firebase-9d4e9:testIamPermissions  
+
+[debug] [2019-09-06T05:32:46.996Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-06T05:32:47.001Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9  
+ 
+[debug] [2019-09-06T05:32:55.746Z] ----------------------------------------------------------------------
+[debug] [2019-09-06T05:32:55.748Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase serve -o 0.0.0.0
+[debug] [2019-09-06T05:32:55.748Z] CLI Version:   7.3.0
+[debug] [2019-09-06T05:32:55.748Z] Platform:      linux
+[debug] [2019-09-06T05:32:55.748Z] Node Version:  v10.16.0
+[debug] [2019-09-06T05:32:55.749Z] Time:          Fri Sep 06 2019 00:32:55 GMT-0500 (GMT-05:00)
+[debug] [2019-09-06T05:32:55.749Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-06T05:32:55.756Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-06T05:32:55.757Z] > authorizing via signed-in user
+[debug] [2019-09-06T05:32:55.757Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get"]
+[debug] [2019-09-06T05:32:55.759Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angular-crud-firebase-9d4e9:testIamPermissions  
+
+[debug] [2019-09-06T05:33:06.244Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-06T05:33:06.246Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9  
+ 
+[debug] [2019-09-06T05:33:26.647Z] ----------------------------------------------------------------------
+[debug] [2019-09-06T05:33:26.651Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase serve -o 0.0.0.0 --debug
+[debug] [2019-09-06T05:33:26.651Z] CLI Version:   7.3.0
+[debug] [2019-09-06T05:33:26.652Z] Platform:      linux
+[debug] [2019-09-06T05:33:26.652Z] Node Version:  v10.16.0
+[debug] [2019-09-06T05:33:26.652Z] Time:          Fri Sep 06 2019 00:33:26 GMT-0500 (GMT-05:00)
+[debug] [2019-09-06T05:33:26.652Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-06T05:33:26.664Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-06T05:33:26.665Z] > authorizing via signed-in user
+[debug] [2019-09-06T05:33:26.665Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get"]
+[debug] [2019-09-06T05:33:26.668Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angular-crud-firebase-9d4e9:testIamPermissions  
+
+[debug] [2019-09-06T05:33:39.442Z] ----------------------------------------------------------------------
+[debug] [2019-09-06T05:33:39.448Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase serve -o 0.0.0.0 --debug
+[debug] [2019-09-06T05:33:39.449Z] CLI Version:   7.3.0
+[debug] [2019-09-06T05:33:39.449Z] Platform:      linux
+[debug] [2019-09-06T05:33:39.449Z] Node Version:  v10.16.0
+[debug] [2019-09-06T05:33:39.450Z] Time:          Fri Sep 06 2019 00:33:39 GMT-0500 (GMT-05:00)
+[debug] [2019-09-06T05:33:39.450Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-06T05:33:39.465Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-06T05:33:39.465Z] > authorizing via signed-in user
+[debug] [2019-09-06T05:33:39.466Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get"]
+[debug] [2019-09-06T05:33:39.470Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angular-crud-firebase-9d4e9:testIamPermissions  
+
+[debug] [2019-09-06T05:34:20.980Z] ----------------------------------------------------------------------
+[debug] [2019-09-06T05:34:20.984Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase serve --debug
+[debug] [2019-09-06T05:34:20.984Z] CLI Version:   7.3.0
+[debug] [2019-09-06T05:34:20.984Z] Platform:      linux
+[debug] [2019-09-06T05:34:20.985Z] Node Version:  v10.16.0
+[debug] [2019-09-06T05:34:20.985Z] Time:          Fri Sep 06 2019 00:34:20 GMT-0500 (GMT-05:00)
+[debug] [2019-09-06T05:34:20.985Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-06T05:34:20.996Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-06T05:34:20.996Z] > authorizing via signed-in user
+[debug] [2019-09-06T05:34:20.997Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get"]
+[debug] [2019-09-06T05:34:20.999Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angular-crud-firebase-9d4e9:testIamPermissions  
+
+[debug] [2019-09-06T05:34:21.479Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-06T05:34:21.485Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9  
+ 
+[debug] [2019-09-06T05:34:21.986Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/sebastian/Proyectos/Angular/angular-crud-firebase'...
+[info] 
+[debug] [2019-09-06T05:34:21.995Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9/webApps/-/config  
+ 
+[debug] [2019-09-06T05:34:22.561Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist/angular-crud-firebase
+[info] ✔  hosting: Local server: http://localhost:5000
+[info] Shutting down...
+[debug] [2019-09-06T05:34:30.397Z] ----------------------------------------------------------------------
+[debug] [2019-09-06T05:34:30.402Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase serve -o 0.0.0.0 --debug
+[debug] [2019-09-06T05:34:30.403Z] CLI Version:   7.3.0
+[debug] [2019-09-06T05:34:30.403Z] Platform:      linux
+[debug] [2019-09-06T05:34:30.403Z] Node Version:  v10.16.0
+[debug] [2019-09-06T05:34:30.404Z] Time:          Fri Sep 06 2019 00:34:30 GMT-0500 (GMT-05:00)
+[debug] [2019-09-06T05:34:30.404Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-06T05:34:30.416Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-06T05:34:30.416Z] > authorizing via signed-in user
+[debug] [2019-09-06T05:34:30.417Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get"]
+[debug] [2019-09-06T05:34:30.419Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angular-crud-firebase-9d4e9:testIamPermissions  
+
+[debug] [2019-09-06T05:34:30.885Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-06T05:34:30.889Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9  
+ 
+[debug] [2019-09-06T05:34:31.267Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/sebastian/Proyectos/Angular/angular-crud-firebase'...
+[info] 
+[debug] [2019-09-06T05:34:31.273Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9/webApps/-/config  
+ 
+[debug] [2019-09-06T05:34:31.701Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist/angular-crud-firebase
+[info] ✔  hosting: Local server: http://0.0.0.0:5000

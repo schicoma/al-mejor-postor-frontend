@@ -39,7 +39,14 @@ export class AuthService {
 
   estaElUsuarioEnSesion() {
     const usuario = JSON.parse(localStorage.getItem('user'));
-    return usuario != null
+
+    const estaElUsuarioEnSesion = usuario !== undefined && usuario !== null;
+
+    if (estaElUsuarioEnSesion && !this.usuario) {
+      this.usuario = usuario;
+    }
+
+    return estaElUsuarioEnSesion;
   }
 
 }

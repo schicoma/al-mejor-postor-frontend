@@ -1,0 +1,147 @@
+<app-header></app-header>
+
+<div class="loading" *ngIf="loading">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+
+<!-- registrar producto form-->
+<section class="checkout_area padding_top">
+    <div class="container">
+        <div class="billing_details">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h3>Registro de producto</h3>
+                    <form class="row contact_form" novalidate="novalidate" (ngSubmit)="registrarProducto(myForm)"
+                        #myForm="ngForm">
+                        <div class="col-md-12 form-group p_star">
+                            <select nice-select [value]="producto.categoria"
+                                [attr.data-value]="producto.categoria" [(ngModel)]="producto.categoria" name="categoria"
+                                #categoria="ngModel" required="required">
+                                <option value="-1" disabled> Seleccione una categoría</option>
+                                <option [value]="categoria.id" *ngFor="let categoria of categorias">{{categoria.nombre}}
+                                </option>
+                            </select>
+                            <div *ngIf="myForm.submitted && (categoria.invalid || producto.categoria === -1)"
+                                class="invalid-message" style="margin-top: 45px">
+                                <span *ngIf="categoria.errors?.required || producto.categoria === -1">Campo
+                                    requerido</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" id="nombreProducto" name="nombreProducto"
+                                [(ngModel)]="producto.nombre" #nombreProducto="ngModel"
+                                placeholder="Nombre del Producto *" required maxlength="80" />
+                            <div *ngIf="myForm.submitted && nombreProducto.invalid" class="invalid-message">
+                                <span *ngIf="nombreProducto.errors.required">Campo requerido</span>
+                                <span *ngIf="nombreProducto.errors.maxlength">Solo se permiten 80 caracteres</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <textarea class="form-control" id="descripcionProducto" name="descripcionProducto" rows="1"
+                                maxlength="300" [(ngModel)]="producto.descripcion"
+                                placeholder="Descripción del Producto" #descripcionProducto="ngModel"
+                                required></textarea>
+                            <div *ngIf="myForm.submitted && descripcionProducto.invalid" class="invalid-message">
+                                <span *ngIf="descripcionProducto.errors.required">Campo requerido</span>
+                                <span *ngIf="descripcionProducto.errors.maxlength">Solo se permiten 300
+                                    caracteres</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-md-4 form-group p_star">
+                                    <input type="number" class="form-control" id="precioProducto" name="precioProducto"
+                                        [(ngModel)]="producto.precio" placeholder="Precio base ($) *" required
+                                        #precioProducto="ngModel" pattern="^\d+(?:[,.]\d+)?$" />
+                                    <div *ngIf="myForm.submitted && precioProducto.invalid" class="invalid-message">
+                                        <span *ngIf="precioProducto.errors.required">Campo requerido</span>
+                                        <span *ngIf="precioProducto.errors.pattern">El valor no es un expresión numérica correcta</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <label> Fecha Inicio </label>
+                            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio"
+                                [(ngModel)]="producto.fechaInicio" #fechaInicio="ngModel" required />
+                            <div *ngIf="myForm.submitted && fechaInicio.invalid" class="invalid-message">
+                                <span *ngIf="fechaInicio.errors.required">Campo requerido</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <label> Fecha Final </label>
+                            <input type="date" class="form-control" id="fechaFin" name="fechaFin"
+                                [(ngModel)]="producto.fechaFin" #fechaFin="ngModel" required />
+                            <div *ngIf="myForm.submitted && fechaFin.invalid" class="invalid-message">
+                                <span *ngIf="fechaFin.errors.required">Campo requerido</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <h3 class="mb-3">Fotos</h3>
+                            <div class="dropzone"></div>
+                            <div *ngIf="myForm.submitted && errorImagenesRequerido" class="invalid-message">
+                                <span>Campo requerido</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="">
+                                <input type="checkbox" id="cbx-terminos-y-condiciones" name="selector"
+                                    [(ngModel)]="aceptarTerminosYCondiciones" />
+                                <label for="cbx-terminos-y-condiciones"> He leído los </label>
+                                <a href="javascript:void(0)" tabindex=""
+                                    (click)="mostrarTerminosYCondiciones = !mostrarTerminosYCondiciones"> términos y
+                                    condiciones*</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group" *ngIf="mostrarTerminosYCondiciones">
+                            <app-terminos-y-condiciones></app-terminos-y-condiciones>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="btn_3" id="btnRegistrarProd">
+                                Registrar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+<!--
+                <div class="col-lg-4 d-none d-lg-block d-xl-block">
+                    <div class="order_box" style="padding-left: 20px;padding-right: 20px;">
+                        <h2>Resumen de contacto</h2>
+                        <div class="col-lg-12 mt-4">
+                            <div class="media contact-info">
+                                <span class="contact-info__icon"><i class="ti-home"></i></span>
+                                <div class="media-body">
+                                    <h3 style="padding: 0;">Surco</h3>
+                                    <p style="font-size: 12px;">Lima</p>
+                                </div>
+                            </div>
+                            <div class="media contact-info">
+                                <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                                <div class="media-body">
+                                    <h3>957 355 738</h3>
+                                    <p style="line-height: 0;font-size: 12px;">Disponible L - V
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="media contact-info">
+                                <span class="contact-info__icon"><i class="ti-email"></i></span>
+                                <div class="media-body">
+                                    <p style="padding-top: 0px;">sebastianchicoma97@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

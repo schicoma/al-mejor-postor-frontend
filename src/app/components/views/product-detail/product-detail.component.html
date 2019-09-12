@@ -1,5 +1,15 @@
 <app-header></app-header>
 
+<div class="loading" *ngIf="loading">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+
 <!--================Single Product Area =================-->
 <div class="product_image_area section_padding">
     <div class="container">
@@ -7,17 +17,8 @@
             <div class="col-lg-7 col-xl-7">
                 <div class="product_slider_img">
                     <div id="vertical">
-                        <div data-thumb="assets/img/temp/producto_1_a.jpg">
-                            <img src="assets/img/temp/producto_1_a.jpg" />
-                        </div>
-                        <div data-thumb="assets/img/temp/producto_1_b.jpg">
-                            <img src="assets/img/temp/producto_1_b.jpg" />
-                        </div>
-                        <div data-thumb="assets/img/temp/producto_1_c.jpg">
-                            <img src="assets/img/temp/producto_1_c.jpg" />
-                        </div>
-                        <div data-thumb="assets/img/temp/producto_1_d.jpg">
-                            <img src="assets/img/temp/producto_1_d.jpg" />
+                        <div *ngFor="let imagen of producto.imagenes" [attr.data-thumb]="imagen" class="text-center">
+                            <img [src]="imagen" height="350" />
                         </div>
                     </div>
                 </div>
@@ -25,37 +26,52 @@
             <div class="col-lg-5 col-xl-4">
                 <div class="s_product_text">
                     <!--<h5>previous <span>|</span> next</h5>-->
-                    <h3>ONE PIECE - FIGURA MONKEY D LUFFY</h3>
-                    <h2>S/ 60.00</h2>
+                    <h3>{{producto.nombre}}</h3>
+                    <h2 *ngIf="producto.precioNuevo">
+                        {{producto.precioNuevo | customCurrency }} <small *ngIf="producto.precioAntiguo"
+                            class="old-price">{{producto.precioAntiguo | customCurrency }}</small>
+                    </h2>
                     <ul class="list">
-                        <li>
-                            <a class="active" href="#">
-                                <span>Categoria</span> : Figuras de acción</a>
+                        <li *ngIf="mapaDeCategorias">
+                            <a class="active" href="#" style="font-weight: 600">
+                                <span>Categoria</span> : {{mapaDeCategorias[producto.categoria]}}</a>
                         </li>
+                        <!--   
                         <li>
                             <a href="#"> <span>Estado</span> : Nuevo</a>
                         </li>
+                    -->
                         <li>
-                            <a href="#"> <span>Cierre</span> : 04 de setiembre</a>
+                            <a href="#"> <span>Comienza el</span> : {{producto.fechaInicio?.toDate() | formatoFecha: 'DD/MM/YYYY'}}</a>
                         </li>
                         <li>
+                            <a href="#"> <span>Cierre</span> : {{producto.fechaFin?.toDate() | formatoFecha: 'DD/MM/YYYY'}}</a>
+                        </li>
+                        <li class="mt-2">
                             <a href="#"> <i class="fa fa-map-marker-alt"></i> Lima</a>
                         </li>
                     </ul>
-                    <p>
-                        First replenish living. Creepeth image image. Creeping can't, won't called.
-                        Two fruitful let days signs sea together all land fly subdue
-                    </p>
-                    <div class="card_area d-flex justify-content-between align-items-center">
-                        <!--
+                    <blockquote class="generic-blockquote mt-3">{{producto.descripcion}}</blockquote>
+                    <div class="card_area d-flex justify-content-between align-items-center"
+                        *ngIf="!mostrarFormularioAOfertar && !esMiProductoOfertado">
+                        <a href="javascript:void(0)" class="btn_3" (click)="mostrarFormularioOfertarFn()">OFERTAR</a>
+                   <!--
+                        <a href="javascript:void(0)" class="like_us"> <i class="ti-heart"></i> </a>
+                -->
+                    </div>
+                    <div class="card_area d-flex align-items-center" *ngIf="mostrarFormularioAOfertar">
                         <div class="product_count">
-                            <span class="inumber-decrement"> <i class="ti-minus"></i></span>
-                            <input class="input-number" type="text" value="1" min="0" max="10">
-                            <span class="number-increment"> <i class="ti-plus"></i></span>
+                            <button class="number-decrement" (click)="restarCantidadAOfertar()"> <i
+                                    class="ti-minus"></i></button>
+                            <input class="input-number" type="text" [value]="cantidadAOfertar | customCurrency "
+                                disabled="disabled">
+                            <button class="number-increment" (click)="aumentarCantidadAOfertar()"> <i
+                                    class="ti-plus"></i></button>
                         </div>
-                    -->
-                        <a href="#" class="btn_3">OFERTAR</a>
-                        <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
+                        <a href="javascript:void(0)" class="genric-btn info circle" (click)="registrarOferta()"><i
+                                class="fa fa-check"></i></a>
+                        <a href="javascript:void(0)" class="genric-btn default circle"
+                            (click)="mostrarFormularioAOfertar = false"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
             </div>
@@ -69,29 +85,66 @@
     <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                    aria-selected="true">Descripción</a>
+                <a class="nav-link active" id="ofertas-tab" data-toggle="tab" href="#ofertas" role="tab"
+                    aria-controls="ofertas" aria-selected="true">Ofertas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contacto-tab" data-toggle="tab" href="#contacto" role="tab"
+                    aria-controls="contacto" aria-selected="true">Contacto</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <blockquote class="generic-blockquote">
-                    <p>
-                        Figura de Luffy One Piece de 17 cm de alto aproximadamente
-
-                        Hacemos envíos a Nivel Nacional vía Olva Courier o CIVA
-                        Entregas en Lima Centro Cívico Real Plaza, si es otro lugar previa coordinación.
-                        HACEMOS DELIVERY
-
-                        ENTREGAMOS BOLETA DE VENTA
-
-
-                        PASADO 2 DÍAS DE HABER REALIZADO LA COMPRA Y NO SE CONCRETA NADA, SE PROCEDERÁ A CALIFICAR COMO
-                        NEGATIVO AL COMPRADOR
-
-                        REALICE LAS PREGUNTAS NECESARIAS ANTES DE PROCEDER A REALIZAR SU COMPRA .
-                    </p>
-                </blockquote>
+            <div class="tab-pane fade show active" id="ofertas" role="tabpanel" aria-labelledby="ofertas-tab">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center" scope="col">Fecha</th>
+                                <th class="text-left" scope="col">Usuario</th>
+                                <th class="text-right" scope="col">Precio Anterior</th>
+                                <th class="text-right" scope="col">Nuevo Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let ofertaObject of ofertas">
+                                <td class="text-center">{{ofertaObject.fecha?.toDate() | formatoFecha}}</td>
+                                <th scope="row" class="text-left">
+                                    <i class="fa fa-user"></i> {{ofertaObject.usuario.nombre}}
+                                </th>
+                                <td class="text-right">{{ofertaObject.precioAntiguo | customCurrency }}</td>
+                                <td class="text-right">{{ofertaObject.precioNuevo | customCurrency }}</td>
+                            </tr>
+                            <tr *ngIf="!ofertas?.length">
+                               <td colspan="4">
+                                    Aún no hay ofertas para este producto
+                               </td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="contacto" role="tabpanel" aria-labelledby="contacto-tab">
+                <div class="col-lg-8 col-lx-4">
+                    <div class="confirmation_part">
+                        <div class="single_confirmation_details">
+                            <h4>Resumen de contacto</h4>
+                            <ul>
+                                <li>
+                                    <p>Nombres</p><span>: Sebastian</span>
+                                </li>
+                                <li>
+                                    <p>Apellidos</p><span>: Chicoma</span>
+                                </li>
+                                <li>
+                                    <p>Email</p><span>: sebastianchicoma97@gmail.com</span>
+                                </li>
+                                <li>
+                                    <p>Teléfono</p><span>: 999777666</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

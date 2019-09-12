@@ -1,0 +1,441 @@
+[debug] [2019-09-02T03:59:12.743Z] ----------------------------------------------------------------------
+[debug] [2019-09-02T03:59:12.748Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase emulators:start --only hosting --debug
+[debug] [2019-09-02T03:59:12.749Z] CLI Version:   7.3.0
+[debug] [2019-09-02T03:59:12.749Z] Platform:      linux
+[debug] [2019-09-02T03:59:12.749Z] Node Version:  v10.16.0
+[debug] [2019-09-02T03:59:12.750Z] Time:          Sun Sep 01 2019 22:59:12 GMT-0500 (GMT-05:00)
+[debug] [2019-09-02T03:59:12.750Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-02T03:59:12.765Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-02T03:59:12.765Z] > authorizing via signed-in user
+[info] i  Starting emulators: ["hosting"]
+[debug] [2019-09-02T03:59:12.796Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9/webApps/-/config  
+ 
+[debug] [2019-09-02T03:59:16.142Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist/angular-crud-firebase
+[info] ✔  hosting: Local server: http://localhost:5000
+[info] ✔  hosting: Emulator started at http://localhost:5000
+[info] ✔  All emulators started, it is now safe to connect.
+[info] i  Shutting down emulators.
+[info] i  Stopping hosting emulator
+[debug] [2019-09-02T04:05:00.406Z] ----------------------------------------------------------------------
+[debug] [2019-09-02T04:05:00.411Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase serve --debug
+[debug] [2019-09-02T04:05:00.412Z] CLI Version:   7.3.0
+[debug] [2019-09-02T04:05:00.412Z] Platform:      linux
+[debug] [2019-09-02T04:05:00.412Z] Node Version:  v10.16.0
+[debug] [2019-09-02T04:05:00.413Z] Time:          Sun Sep 01 2019 23:05:00 GMT-0500 (GMT-05:00)
+[debug] [2019-09-02T04:05:00.413Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-02T04:05:00.428Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-02T04:05:00.429Z] > authorizing via signed-in user
+[debug] [2019-09-02T04:05:00.430Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get"]
+[debug] [2019-09-02T04:05:00.434Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angular-crud-firebase-9d4e9:testIamPermissions  
+
+[debug] [2019-09-02T04:05:01.006Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-02T04:05:01.011Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9  
+ 
+[debug] [2019-09-02T04:05:01.815Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/home/sebastian/Proyectos/Angular/angular-crud-firebase'...
+[info] 
+[debug] [2019-09-02T04:05:01.822Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9/webApps/-/config  
+ 
+[debug] [2019-09-02T04:05:02.401Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist/angular-crud-firebase
+[info] ✔  hosting: Local server: http://localhost:5000
+[info] Shutting down...
+[debug] [2019-09-02T04:10:20.433Z] ----------------------------------------------------------------------
+[debug] [2019-09-02T04:10:20.438Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase serve --debug
+[debug] [2019-09-02T04:10:20.439Z] CLI Version:   7.3.0
+[debug] [2019-09-02T04:10:20.439Z] Platform:      linux
+[debug] [2019-09-02T04:10:20.439Z] Node Version:  v10.16.0
+[debug] [2019-09-02T04:10:20.440Z] Time:          Sun Sep 01 2019 23:10:20 GMT-0500 (GMT-05:00)
+[debug] [2019-09-02T04:10:20.440Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-02T04:10:20.452Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-02T04:10:20.453Z] > authorizing via signed-in user
+[debug] [2019-09-02T04:10:20.453Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get"]
+[debug] [2019-09-02T04:10:20.456Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-09-02T04:10:20.457Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-09-02T04:10:33.831Z] ----------------------------------------------------------------------
+[debug] [2019-09-02T04:10:33.835Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase emulators:start --only hosting --debug
+[debug] [2019-09-02T04:10:33.836Z] CLI Version:   7.3.0
+[debug] [2019-09-02T04:10:33.836Z] Platform:      linux
+[debug] [2019-09-02T04:10:33.836Z] Node Version:  v10.16.0
+[debug] [2019-09-02T04:10:33.836Z] Time:          Sun Sep 01 2019 23:10:33 GMT-0500 (GMT-05:00)
+[debug] [2019-09-02T04:10:33.837Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-02T04:10:33.846Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-02T04:10:33.847Z] > authorizing via signed-in user
+[info] i  Starting emulators: ["hosting"]
+[debug] [2019-09-02T04:10:33.871Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-09-02T04:10:33.872Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-09-02T04:10:34.471Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-02T04:10:34.552Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9/webApps/-/config  
+ 
+[debug] [2019-09-02T04:10:35.509Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist/angular-crud-firebase
+[info] ✔  hosting: Local server: http://localhost:5000
+[info] ✔  hosting: Emulator started at http://localhost:5000
+[info] ✔  All emulators started, it is now safe to connect.
+[info] i  Shutting down emulators.
+[info] i  Stopping hosting emulator
+[debug] [2019-09-02T04:18:16.257Z] ----------------------------------------------------------------------
+[debug] [2019-09-02T04:18:16.263Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase emulators:start --only hosting --debug
+[debug] [2019-09-02T04:18:16.264Z] CLI Version:   7.3.0
+[debug] [2019-09-02T04:18:16.264Z] Platform:      linux
+[debug] [2019-09-02T04:18:16.264Z] Node Version:  v10.16.0
+[debug] [2019-09-02T04:18:16.265Z] Time:          Sun Sep 01 2019 23:18:16 GMT-0500 (GMT-05:00)
+[debug] [2019-09-02T04:18:16.265Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-02T04:18:16.279Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-02T04:18:16.279Z] > authorizing via signed-in user
+[info] i  Starting emulators: ["hosting"]
+[debug] [2019-09-02T04:18:16.306Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9/webApps/-/config  
+ 
+[debug] [2019-09-02T04:18:48.883Z] ----------------------------------------------------------------------
+[debug] [2019-09-02T04:18:48.888Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase emulators:start --only hosting --debug
+[debug] [2019-09-02T04:18:48.888Z] CLI Version:   7.3.0
+[debug] [2019-09-02T04:18:48.888Z] Platform:      linux
+[debug] [2019-09-02T04:18:48.889Z] Node Version:  v10.16.0
+[debug] [2019-09-02T04:18:48.889Z] Time:          Sun Sep 01 2019 23:18:48 GMT-0500 (GMT-05:00)
+[debug] [2019-09-02T04:18:48.889Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-02T04:18:48.902Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-02T04:18:48.903Z] > authorizing via signed-in user
+[info] i  Starting emulators: ["hosting"]
+[debug] [2019-09-02T04:18:48.931Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9/webApps/-/config  
+ 
+[debug] [2019-09-02T04:18:54.575Z] ----------------------------------------------------------------------
+[debug] [2019-09-02T04:18:54.579Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase emulators:start --only hosting --debug
+[debug] [2019-09-02T04:18:54.580Z] CLI Version:   7.3.0
+[debug] [2019-09-02T04:18:54.580Z] Platform:      linux
+[debug] [2019-09-02T04:18:54.580Z] Node Version:  v10.16.0
+[debug] [2019-09-02T04:18:54.581Z] Time:          Sun Sep 01 2019 23:18:54 GMT-0500 (GMT-05:00)
+[debug] [2019-09-02T04:18:54.581Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-02T04:18:54.593Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-02T04:18:54.594Z] > authorizing via signed-in user
+[info] i  Starting emulators: ["hosting"]
+[debug] [2019-09-02T04:18:54.616Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9/webApps/-/config  
+ 
+[debug] [2019-09-02T04:18:55.246Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist/angular-crud-firebase
+[info] ✔  hosting: Local server: http://localhost:5000
+[info] ✔  hosting: Emulator started at http://localhost:5000
+[info] ✔  All emulators started, it is now safe to connect.
+[info] i  Shutting down emulators.
+[info] i  Stopping hosting emulator
+[debug] [2019-09-02T04:20:06.707Z] ----------------------------------------------------------------------
+[debug] [2019-09-02T04:20:06.713Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase emulators:start --only hosting --debug
+[debug] [2019-09-02T04:20:06.714Z] CLI Version:   7.3.0
+[debug] [2019-09-02T04:20:06.714Z] Platform:      linux
+[debug] [2019-09-02T04:20:06.714Z] Node Version:  v10.16.0
+[debug] [2019-09-02T04:20:06.715Z] Time:          Sun Sep 01 2019 23:20:06 GMT-0500 (GMT-05:00)
+[debug] [2019-09-02T04:20:06.715Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-02T04:20:06.728Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-02T04:20:06.729Z] > authorizing via signed-in user
+[info] i  Starting emulators: ["hosting"]
+[debug] [2019-09-02T04:20:06.752Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9/webApps/-/config  
+ 
+[debug] [2019-09-02T04:20:07.442Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist/angular-crud-firebase
+[info] ✔  hosting: Local server: http://localhost:5000
+[info] ✔  hosting: Emulator started at http://localhost:5000
+[info] ✔  All emulators started, it is now safe to connect.
+[info] i  Shutting down emulators.
+[info] i  Stopping hosting emulator
+[debug] [2019-09-02T09:13:30.484Z] ----------------------------------------------------------------------
+[debug] [2019-09-02T09:13:30.489Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase deploy --only hosting --debug
+[debug] [2019-09-02T09:13:30.489Z] CLI Version:   7.3.0
+[debug] [2019-09-02T09:13:30.489Z] Platform:      linux
+[debug] [2019-09-02T09:13:30.490Z] Node Version:  v10.16.0
+[debug] [2019-09-02T09:13:30.490Z] Time:          Mon Sep 02 2019 04:13:30 GMT-0500 (GMT-05:00)
+[debug] [2019-09-02T09:13:30.490Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-02T09:13:30.502Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-02T09:13:30.502Z] > authorizing via signed-in user
+[debug] [2019-09-02T09:13:30.502Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-09-02T09:13:30.504Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-09-02T09:13:30.505Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-09-02T09:13:30.911Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-02T09:13:31.011Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angular-crud-firebase-9d4e9:testIamPermissions  
+
+[debug] [2019-09-02T09:13:31.522Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-02T09:13:31.527Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9  
+ 
+[debug] [2019-09-02T09:13:54.226Z] ----------------------------------------------------------------------
+[debug] [2019-09-02T09:13:54.230Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase deploy --only hosting --debug
+[debug] [2019-09-02T09:13:54.231Z] CLI Version:   7.3.0
+[debug] [2019-09-02T09:13:54.231Z] Platform:      linux
+[debug] [2019-09-02T09:13:54.231Z] Node Version:  v10.16.0
+[debug] [2019-09-02T09:13:54.231Z] Time:          Mon Sep 02 2019 04:13:54 GMT-0500 (GMT-05:00)
+[debug] [2019-09-02T09:13:54.231Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-02T09:13:54.257Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-02T09:13:54.257Z] > authorizing via signed-in user
+[debug] [2019-09-02T09:13:54.258Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-09-02T09:13:54.262Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angular-crud-firebase-9d4e9:testIamPermissions  
+
+[debug] [2019-09-02T09:13:54.746Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-02T09:13:54.749Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9  
+ 
+[debug] [2019-09-02T09:13:55.224Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'angular-crud-firebase-9d4e9'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-09-02T09:13:55.233Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/angular-crud-firebase-9d4e9/versions  
+
+[debug] [2019-09-02T09:13:56.648Z] <<< HTTP RESPONSE 200
+[info] i  hosting[angular-crud-firebase-9d4e9]: beginning deploy...
+[info] i  hosting[angular-crud-firebase-9d4e9]: found 426 files in dist/angular-crud-firebase
+[debug] [2019-09-02T09:13:56.808Z] [hosting] hash cache [ZGlzdC9hbmd1bGFyLWNydWQtZmlyZWJhc2U] load error: lines is not defined
+[info] i  hosting: hashing files [421/426] (98%)
+[debug] [2019-09-02T09:13:59.411Z] [hosting] hash cache [ZGlzdC9hbmd1bGFyLWNydWQtZmlyZWJhc2U] stored for 426 files
+[debug] [2019-09-02T09:13:59.412Z] [hosting][hash queue][FINAL]
+[debug] [2019-09-02T09:13:59.412Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/angular-crud-firebase-9d4e9/versions/080449203f3ac386:populateFiles  
+ <request body omitted>
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[debug] [2019-09-02T09:14:59.822Z] [populateQueue] Retrying task index 0
+[debug] [2019-09-02T09:14:59.823Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/angular-crud-firebase-9d4e9/versions/080449203f3ac386:populateFiles  
+ <request body omitted>
+[info] i  hosting: adding files to version [0/426] (0%)
+[debug] [2019-09-02T09:15:02.576Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-02T09:15:02.612Z] [hosting][populate queue][FINAL]
+[debug] [2019-09-02T09:15:02.612Z] [hosting] uploads queued: 12
+[info] i  hosting: uploading new files [0/12] (0%)
+[info] i  hosting: uploading new files [3/12] (25%)
+[info] i  hosting: uploading new files [8/12] (66%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[info] i  hosting: uploading new files [10/12] (83%)
+[debug] [2019-09-02T09:15:33.068Z] [uploadQueue] Retrying task f6ea0cb085a8a207c0087e16e8c5d4e3794cc9a269d0ed0b33ac16fd91950356
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[debug] [2019-09-02T09:17:12.486Z] [uploadQueue] Retrying task dd6964547421de97dea0350b3d4512a3d67a164c97a608c2633aff91a4912be8
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[info] i  hosting: uploading new files [11/12] (91%)
+[debug] [2019-09-02T09:18:01.066Z] ----------------------------------------------------------------------
+[debug] [2019-09-02T09:18:01.073Z] Command:       /opt/nodejs/node-v10.16.0-linux-x64/bin/node /opt/nodejs/node-v10.16.0-linux-x64/bin/firebase deploy --only hosting --debug
+[debug] [2019-09-02T09:18:01.074Z] CLI Version:   7.3.0
+[debug] [2019-09-02T09:18:01.074Z] Platform:      linux
+[debug] [2019-09-02T09:18:01.074Z] Node Version:  v10.16.0
+[debug] [2019-09-02T09:18:01.074Z] Time:          Mon Sep 02 2019 04:18:01 GMT-0500 (GMT-05:00)
+[debug] [2019-09-02T09:18:01.074Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-02T09:18:01.083Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-02T09:18:01.083Z] > authorizing via signed-in user
+[debug] [2019-09-02T09:18:01.083Z] [iam] checking project angular-crud-firebase-9d4e9 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-09-02T09:18:01.087Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angular-crud-firebase-9d4e9:testIamPermissions  
+
+[debug] [2019-09-02T09:18:01.561Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-02T09:18:01.565Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angular-crud-firebase-9d4e9  
+ 
+[debug] [2019-09-02T09:18:02.005Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'angular-crud-firebase-9d4e9'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-09-02T09:18:02.016Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/angular-crud-firebase-9d4e9/versions  
+
+[debug] [2019-09-02T09:18:03.053Z] <<< HTTP RESPONSE 200
+[info] i  hosting[angular-crud-firebase-9d4e9]: beginning deploy...
+[info] i  hosting[angular-crud-firebase-9d4e9]: found 426 files in dist/angular-crud-firebase
+[debug] [2019-09-02T09:18:03.188Z] [hosting] hash cache [ZGlzdC9hbmd1bGFyLWNydWQtZmlyZWJhc2U] load error: lines is not defined
+[info] i  hosting: hashing files [295/426] (69%)
+[debug] [2019-09-02T09:18:06.317Z] [hosting] hash cache [ZGlzdC9hbmd1bGFyLWNydWQtZmlyZWJhc2U] stored for 426 files
+[debug] [2019-09-02T09:18:06.317Z] [hosting][hash queue][FINAL]
+[debug] [2019-09-02T09:18:06.318Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/angular-crud-firebase-9d4e9/versions/8b76f776caf39d2d:populateFiles  
+ <request body omitted>
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[debug] [2019-09-02T09:19:06.728Z] [populateQueue] Retrying task index 0
+[debug] [2019-09-02T09:19:06.730Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/angular-crud-firebase-9d4e9/versions/8b76f776caf39d2d:populateFiles  
+ <request body omitted>
+[info] i  hosting: adding files to version [0/426] (0%)
+[info] i  hosting: adding files to version [0/426] (0%)
+[debug] [2019-09-02T09:19:09.623Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-02T09:19:09.630Z] [hosting][populate queue][FINAL]
+[debug] [2019-09-02T09:19:09.630Z] [hosting] uploads queued: 1
+[info] i  hosting: uploading new files [0/1] (0%)
+[debug] [2019-09-02T09:19:13.000Z] [hosting][upload queue][FINAL]
+[info] ✔  hosting[angular-crud-firebase-9d4e9]: file upload complete
+[debug] [2019-09-02T09:19:13.002Z] [hosting] deploy completed after 69946ms
+[debug] [2019-09-02T09:19:14.096Z] [
+  {
+    "config": {
+      "public": "dist/angular-crud-firebase",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "angular-crud-firebase-9d4e9"
+    },
+    "site": "angular-crud-firebase-9d4e9",
+    "version": "sites/angular-crud-firebase-9d4e9/versions/8b76f776caf39d2d"
+  }
+]
+[info] i  hosting[angular-crud-firebase-9d4e9]: finalizing version...
+[debug] [2019-09-02T09:19:14.098Z] >>> HTTP REQUEST PATCH https://firebasehosting.googleapis.com/v1beta1/sites/angular-crud-firebase-9d4e9/versions/8b76f776caf39d2d?updateMask=status  
+
+[debug] [2019-09-02T09:19:14.852Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-02T09:19:14.854Z] [hosting] finalized version for angular-crud-firebase-9d4e9:
+[info] ✔  hosting[angular-crud-firebase-9d4e9]: version finalized
+[info] i  hosting[angular-crud-firebase-9d4e9]: releasing new version...
+[debug] [2019-09-02T09:19:14.857Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/angular-crud-firebase-9d4e9/releases?version_name=sites/angular-crud-firebase-9d4e9/versions/8b76f776caf39d2d  
+
+[debug] [2019-09-02T09:19:15.401Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-02T09:19:15.402Z] [hosting] release:
+[info] ✔  hosting[angular-crud-firebase-9d4e9]: release complete
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/angular-crud-firebase-9d4e9/overview
+[info] Hosting URL: https://angular-crud-firebase-9d4e9.firebaseapp.com

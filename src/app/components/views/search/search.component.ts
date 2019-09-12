@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { ProductosService } from 'src/app/services/productos.service';
+import { take } from 'rxjs/operators';
 declare var $: any;
 
 @Component({
@@ -9,20 +11,12 @@ declare var $: any;
 })
 export class SearchComponent implements OnInit, AfterViewInit {
 
-  items = [
-    { nombre: 'ONE PIECE - FIGURA MONKEY D LUFFY', precio: 'S/ 60.00', imagen: 'assets/img/temp/producto_1_a.jpg' },
-    { nombre: 'Quartz Belt Watch', precio: '$150.00', imagen: 'assets/img/product/product_1.png' },
-    { nombre: 'Quartz Belt Watch', precio: '$150.00', imagen: 'assets/img/product/product_3.png' },
-    { nombre: 'Quartz Belt Watch', precio: '$150.00', imagen: 'assets/img/product/product_4.png' },
-    { nombre: 'Quartz Belt Watch', precio: '$150.00', imagen: 'assets/img/product/product_5.png' },
-    { nombre: 'Quartz Belt Watch', precio: '$150.00', imagen: 'assets/img/product/product_6.png' },
-    { nombre: 'Quartz Belt Watch', precio: '$150.00', imagen: 'assets/img/product/product_7.png' },
-    { nombre: 'Quartz Belt Watch', precio: '$150.00', imagen: 'assets/img/product/product_8.png' },
-    { nombre: 'Quartz Belt Watch', precio: '$150.00', imagen: 'assets/img/product/product_2.png' }
-  ];
+  items: Array<any>;
+  startAfter: any;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private productosServices: ProductosService
   ) { }
 
   ngOnInit() {
@@ -32,11 +26,13 @@ export class SearchComponent implements OnInit, AfterViewInit {
       }
       window.scrollTo(0, 0)
     });
+
+    this.next()
+
   }
 
   ngAfterViewInit(): void {
     // Trigger
-
 
     var $range = $(".js-range-slider"),
       $inputFrom = $(".js-input-from"),
@@ -105,4 +101,25 @@ export class SearchComponent implements OnInit, AfterViewInit {
       });
     });
   }
+
+  next() {
+
+    this.productosServices.listarProductos(this.startAfter).snapshotChanges().pipe(take(1)).subscribe((respuesta) => {
+      this.items = [];
+
+      respuesta.forEach((element: any) => {
+        console.log(element);
+        let x = element.payload.doc.data();
+        x['uid'] = element.payload.doc.id;
+
+        console.log(x);
+
+        this.items.push(x);
+      });
+
+      this.startAfter = respuesta[respuesta.length - 1].payload.doc;
+
+    });
+  }
+
 }

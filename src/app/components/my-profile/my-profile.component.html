@@ -1,0 +1,82 @@
+<app-header></app-header>
+
+<div class="loading" *ngIf="loading">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+
+<section class="contact-section padding_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="contact-title">Mis datos</h2>
+            </div>
+            <div class="col-lg-8">
+                <form class="form-contact contact_form" autocomplete="off" id="contactForm" novalidate="novalidate">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Nombres: </label>
+                                <input class="form-control" disabled [value]="usuario?.nombres">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Apellidos: </label>
+                                <input class="form-control" disabled [value]="usuario?.apellidos">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Email: </label>
+                                <input class="form-control" disabled [value]="usuario?.email">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="control-label">Teléfono: </label>
+                                <input class="form-control" disabled [value]="usuario?.telefono">
+                            </div>
+                        </div>
+                        <!--
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input class="form-control" name="subject" id="subject" type="text"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'"
+                                    placeholder='Enter Subject'>
+                            </div>
+                        </div>
+                    -->
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4">
+                <div class="order_box" style="padding-left: 20px;padding-right: 20px;">
+                    <div class="single-element-widget">
+                        <h4 class="mb-30">Mis Preferencias</h4>
+                        <div class="switch-wrap d-flex justify-content-between"
+                            *ngFor="let preferencia of preferencias">
+                            <p> {{preferencia.nombre}} </p>
+                            <div class="primary-checkbox">
+                                <input type="checkbox" id="default-checkbox-{{preferencia.id}}"
+                                    [(ngModel)]="preferencia.checked">
+                                <label for="default-checkbox-{{preferencia.id}}"></label>
+                            </div>
+                        </div>
+                        <div class="form-group mt-30">
+                            <a href="javascript:void(0)" class="btn_3 button-contactForm"
+                                (click)="guardarPreferencias()">Guardar preferencias</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

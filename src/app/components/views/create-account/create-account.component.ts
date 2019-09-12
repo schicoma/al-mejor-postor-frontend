@@ -36,8 +36,6 @@ export class CreateAccountComponent implements OnInit {
         this.usuario.uid = respuesta.user.uid;
         this.usuario.token = uuid.v4();
 
-        console.log(this.usuario);
-
         this.usuariosService.insertarUsuario(this.usuario).then((respuesta) => {
 
           this.mostrarPantallaConfirmacion = true;
@@ -57,7 +55,6 @@ export class CreateAccountComponent implements OnInit {
         
       }
     } else {
-      alert("invalid");
     }
   }
 
