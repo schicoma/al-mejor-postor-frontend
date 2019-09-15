@@ -97,7 +97,9 @@ export class CreateProductComponent implements OnInit, AfterContentInit {
 
       producto.fechaInicio = fechaInicio.toDate();
       producto.fechaFin = fechaFin.toDate();
+      producto.fechaCreacion = new Date();
       producto.estado = 'C';
+      producto.keywords = this.createKeywords(producto.nombre);
       producto.imagenes = [];
 
       for (const file of this.myDropzone.files) {
@@ -127,5 +129,41 @@ export class CreateProductComponent implements OnInit, AfterContentInit {
     }
 
   }
+
+  private createKeywords(name: string): Array<string> {
+    let merged = new Set<string>();
+
+    let words = name.split(' ');
+    let words_length = name.split(' ').length;
+
+    for (let i = 0; i < words_length; i++) {
+      let buildName = '';
+
+      words.forEach((w, index) => {
+        if (index >= i) {
+          buildName = buildName.concat(w + ' ');
+        }
+      });
+
+      merged = new Set([...merged, ...this.generateArrayFromString(buildName)]);
+
+    }
+
+    return [...merged];
+
+  }
+
+  private generateArrayFromString(name: string) {
+    const arrName: Array<string> = [];
+    let curName = '';
+    name.split('').forEach((letter) => {
+      curName += letter;
+      if (curName.length >= 3) {
+        arrName.push(curName.trim());
+      }
+    });
+    return arrName;
+  }
+
 
 }

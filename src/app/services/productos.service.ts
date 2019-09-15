@@ -7,16 +7,19 @@ import { Producto } from '../models/producto';
 })
 export class ProductosService {
 
+  private COLLECTION_NAME: string = 'productos';
+  public limitProducts = 8;
+
   constructor(
     private firebase: AngularFirestore
   ) { }
 
   actualizarProducto(uidProducto: string, datosActualizados: any) {
-    return this.firebase.collection('productos').doc(uidProducto).set(datosActualizados);
+    return this.firebase.collection(this.COLLECTION_NAME).doc(uidProducto).set(datosActualizados);
   }
 
   guardarProducto(uidUsuario: string, producto: Producto) {
-    return this.firebase.collection('productos').add({
+    return this.firebase.collection(this.COLLECTION_NAME).add({
       categoria: producto.categoria,
       nombre: producto.nombre,
       descripcion: producto.descripcion,
@@ -26,31 +29,57 @@ export class ProductosService {
       imagenes: producto.imagenes,
       usuario: {
         uid: uidUsuario
-      }
+      },
+      keywords: producto.keywords,
+      fechaCreacion: producto.fechaCreacion
     });
   }
 
   obtenerProducto(id: string) {
-    return this.firebase.collection('productos').doc(id).get();
+    return this.firebase.collection(this.COLLECTION_NAME).doc(id).get();
   }
 
   obtenerProductoSnapshotChanges(id: string) {
-    return this.firebase.collection('productos').doc(id).snapshotChanges();
+    return this.firebase.collection(this.COLLECTION_NAME).doc(id).snapshotChanges();
   }
 
   listarUltimos5Productos() {
-    return this.firebase.collection('productos', ref => ref.orderBy('fechaInicio', 'desc').limit(5));
+    return this.firebase.collection(this.COLLECTION_NAME, ref => ref.orderBy('fechaInicio', 'desc').limit(5));
   }
 
-  listarProductos(lastValue?: any) {
-    return this.firebase.collection('productos', ref => {
-      let query: Query = ref.orderBy('fechaFin', 'desc');
+  listarProductosNext(comenzarDespuesDe?: any, options: any = {}) {
+    return this.firebase.collection(this.COLLECTION_NAME, ref => {
 
-      if (lastValue) {
-        query = query.startAfter(lastValue);
+      let query: Query = ref.orderBy(options.orderBy || 'fechaFin', 'asc');
+
+      if (options.filterCategory) {
+        query = query.where('categoria', '==', options.filterCategory);
       }
 
-      query = query.limit(4);
+      if (comenzarDespuesDe) {
+        query = query.startAfter(comenzarDespuesDe);
+      }
+
+      query = query.limit(this.limitProducts);
+
+      return query;
+    });
+  }
+
+  listarProductosPrev(comenzarEn?: any, options: any = {}) {
+
+    return this.firebase.collection(this.COLLECTION_NAME, ref => {
+
+      let query: Query = ref.orderBy(options.orderBy || 'fechaFin', 'asc');
+
+      if (options.filterCategory) {
+        query = query.where('categoria', '==', options.filterCategory);
+      }
+      if (comenzarEn) {
+        query = query.startAt(comenzarEn);
+      }
+
+      query = query.limit(this.limitProducts);
 
       return query;
     });

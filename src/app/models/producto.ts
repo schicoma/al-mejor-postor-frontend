@@ -14,4 +14,7 @@ export class Producto {
 
     precioAntiguo: number;
     precioNuevo: number;
+
+    keywords: Array<string>;
+    fechaCreacion: any;
 }

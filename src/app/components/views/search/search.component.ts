@@ -1,7 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ProductosService } from 'src/app/services/productos.service';
-import { take } from 'rxjs/operators';
+import { take, first } from 'rxjs/operators';
+import { CategoriasService } from 'src/app/services/categorias.service';
 declare var $: any;
 
 @Component({
@@ -11,12 +12,24 @@ declare var $: any;
 })
 export class SearchComponent implements OnInit, AfterViewInit {
 
+  categorias: any;
   items: Array<any>;
-  startAfter: any;
+
+  firstInResponse: any;
+  lastInResponse: any;
+  options: any = {};
+  orderBy: string = 'fechaFin';
+
+  // Array de los primeros docuentos de las páginas previas
+  prev_strt_at: Array<any> = [];
+
+  pagination_clicked_count = 0;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private router: Router,
-    private productosServices: ProductosService
+    private productosServices: ProductosService,
+    private categoriasServices: CategoriasService
   ) { }
 
   ngOnInit() {
@@ -27,13 +40,126 @@ export class SearchComponent implements OnInit, AfterViewInit {
       window.scrollTo(0, 0)
     });
 
-    this.next()
+    this.activatedRoute.queryParams.subscribe(params => {
+      console.log(params);
 
+      if (params.filterCategory) {
+        this.options.filterCategory = params.filterCategory;
+      }
+
+      if (params.orderBy) {
+        this.options.orderBy = params.orderBy;
+        this.orderBy = params.orderBy;
+      }
+
+      this.next();
+    });
+
+    this.categoriasServices.obtenerMapaDeCategorias().pipe(first()).subscribe(data => {
+      this.categorias = data;
+    });
+
+  }
+
+  ordenar(orderBy: string) {
+    this.clearCursors();
+    
+    this.options.orderBy = orderBy;
+
+    this.router.navigate(['/search'], { queryParams: this.options });
+  }
+
+  filtrarPorCategoria(categoria?: any) {
+    this.clearCursors();
+
+    if (this.orderBy) {
+      this.options.orderBy = this.orderBy;
+    }
+
+    if (categoria) {
+      this.options.filterCategory = categoria;
+    } else {
+      delete this.options.filterCategory;
+    }
+
+    this.router.navigate(['/search'], { queryParams: this.options });
+  }
+
+  next() {
+    console.log('next');
+    this.productosServices.listarProductosNext(this.lastInResponse, this.options).snapshotChanges().pipe(take(1)).subscribe((respuesta) => {
+
+      if (!respuesta.length) {
+        return;
+      }
+
+      this.items = [];
+
+      respuesta.forEach((element: any) => {
+        let x = element.payload.doc.data();
+        x['uid'] = element.payload.doc.id;
+
+        this.items.push(x);
+      });
+
+      if (!this.lastInResponse) {
+        this.pagination_clicked_count = 0;
+      } else {
+        this.pagination_clicked_count++;
+      }
+
+      this.firstInResponse = respuesta[0].payload.doc;
+      this.lastInResponse = respuesta[respuesta.length - 1].payload.doc;
+
+      this.prev_strt_at.push(this.firstInResponse);
+
+    });
+  }
+
+  prev() {
+    console.log('prev');
+    this.productosServices.listarProductosPrev(this.get_prev_startAt(), this.options).snapshotChanges().pipe(take(1)).subscribe((respuesta) => {
+      this.items = [];
+
+      respuesta.forEach((element: any) => {
+        let x = element.payload.doc.data();
+        x['uid'] = element.payload.doc.id;
+
+        this.items.push(x);
+      });
+
+      this.firstInResponse = respuesta[0].payload.doc;
+      this.lastInResponse = respuesta[respuesta.length - 1].payload.doc;
+
+      this.pagination_clicked_count--;
+
+      this.prev_strt_at.forEach(element => {
+        if (this.firstInResponse.id == element.id) {
+          element = undefined;
+        }
+      });
+    });
+  }
+
+  // Retorna el documento donde la pagina previa comenzó (startAt)
+  get_prev_startAt() {
+    if (this.prev_strt_at.length > (this.pagination_clicked_count + 1)) {
+      this.prev_strt_at.splice(this.prev_strt_at.length - 2, this.prev_strt_at.length - 1);
+    }
+
+    return this.prev_strt_at[this.pagination_clicked_count - 1];
+  }
+
+  clearCursors() {
+    this.prev_strt_at.splice(0, this.prev_strt_at.length - 1);
+    this.lastInResponse = undefined;
+    this.firstInResponse = undefined;
+
+    this.pagination_clicked_count = 0;
   }
 
   ngAfterViewInit(): void {
     // Trigger
-
     var $range = $(".js-range-slider"),
       $inputFrom = $(".js-input-from"),
       $inputTo = $(".js-input-to"),
@@ -57,8 +183,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
       prettify_separator: ".",
       values_separator: " - ",
       force_edges: true
-
-
     });
 
     instance = $range.data("ionRangeSlider");
@@ -99,26 +223,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
       instance.update({
         to: val
       });
-    });
-  }
-
-  next() {
-
-    this.productosServices.listarProductos(this.startAfter).snapshotChanges().pipe(take(1)).subscribe((respuesta) => {
-      this.items = [];
-
-      respuesta.forEach((element: any) => {
-        console.log(element);
-        let x = element.payload.doc.data();
-        x['uid'] = element.payload.doc.id;
-
-        console.log(x);
-
-        this.items.push(x);
-      });
-
-      this.startAfter = respuesta[respuesta.length - 1].payload.doc;
-
     });
   }
 
