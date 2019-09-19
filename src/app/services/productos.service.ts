@@ -56,6 +56,11 @@ export class ProductosService {
         query = query.where('categoria', '==', options.filterCategory);
       }
 
+      if (!options.filterName) {
+        // query = query.where('nombre', 'array-contains', options.filterName.toLowerCase());
+        query = query.where('keywords', 'array-contains', 'FIF');
+      }
+
       if (comenzarDespuesDe) {
         query = query.startAfter(comenzarDespuesDe);
       }
