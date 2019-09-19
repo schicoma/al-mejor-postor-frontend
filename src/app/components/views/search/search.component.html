@@ -64,10 +64,11 @@
                             <div class="single_product_menu d-flex">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="search"
-                                        aria-describedby="inputGroupPrepend">
+                                        [(ngModel)]="nombreAFiltrar" aria-describedby="inputGroupPrepend">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroupPrepend"><i
-                                                class="ti-search"></i></span>
+                                        <span class="input-group-text" style="cursor: pointer;" (click)="filtrarPorNombre(nombreAFiltrar)"
+                                            id="inputGroupPrepend"><i class="ti-search"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

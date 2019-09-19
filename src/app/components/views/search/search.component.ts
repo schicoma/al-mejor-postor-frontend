@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   firstInResponse: any;
   lastInResponse: any;
+  nombreAFiltrar: string;
   options: any = {};
   orderBy: string = 'fechaFin';
 
@@ -47,6 +48,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
         this.options.filterCategory = params.filterCategory;
       }
 
+      if (params.filterName) {
+        this.options.filterName = params.filterName;
+      }
+
       if (params.orderBy) {
         this.options.orderBy = params.orderBy;
         this.orderBy = params.orderBy;
@@ -63,7 +68,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   ordenar(orderBy: string) {
     this.clearCursors();
-    
+
     this.options.orderBy = orderBy;
 
     this.router.navigate(['/search'], { queryParams: this.options });
@@ -84,6 +89,24 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
     this.router.navigate(['/search'], { queryParams: this.options });
   }
+
+  filtrarPorNombre(nombre?: any) {
+    alert(nombre);
+    this.clearCursors();
+
+    if (this.orderBy) {
+      this.options.orderBy = this.orderBy;
+    }
+
+    if (nombre) {
+      this.options.filterName = nombre;
+    } else {
+      delete this.options.filterName;
+    }
+
+    this.router.navigate(['/search'], { queryParams: this.options });
+  }
+
 
   next() {
     console.log('next');

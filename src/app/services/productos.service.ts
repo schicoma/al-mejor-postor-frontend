@@ -48,6 +48,9 @@ export class ProductosService {
   }
 
   listarProductosNext(comenzarDespuesDe?: any, options: any = {}) {
+
+    console.log('filtrando por', options);
+    
     return this.firebase.collection(this.COLLECTION_NAME, ref => {
 
       let query: Query = ref.orderBy(options.orderBy || 'fechaFin', 'asc');
@@ -56,9 +59,9 @@ export class ProductosService {
         query = query.where('categoria', '==', options.filterCategory);
       }
 
-      if (!options.filterName) {
+      if (options.filterName) {
         // query = query.where('nombre', 'array-contains', options.filterName.toLowerCase());
-        query = query.where('keywords', 'array-contains', 'FIF');
+        query = query.where('keywords', 'array-contains', options.filterName);
       }
 
       if (comenzarDespuesDe) {
