@@ -11,6 +11,7 @@ declare var $: any;
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   best_product_slider: any;
   productos: Array<any>;
+  producto: any;
   suscription: Subscription;
   timeInterval: any;
 
@@ -113,9 +114,44 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
+
+
+  }
+
+  constructor(
+    private productosService: ProductosService
+  ) { }
+
+  ngOnInit() {
+
+    this.suscription = this.productosService.listarUltimos5Productos().snapshotChanges().subscribe((respuesta) => {
+      this.productos = [];
+
+      respuesta.forEach(element => {
+        let x: any = element.payload.doc.data();
+        x.uid = element.payload.doc.id;
+
+        this.productos.push(x);
+      });
+
+      if (this.productos.length) {
+        this.producto = this.productos[0];
+
+        this.inicializarProductoPrincipal();
+      }
+
+      setTimeout(() => {
+        this.inicializarSliderImagenes();
+      });
+
+    });
+
+  }
+
+  inicializarProductoPrincipal() {
     this.timeInterval = setInterval(() => {
       //		var endTime = new Date("29 April 2018 9:56:00 GMT+01:00");	
-      let endTime = new Date("04 Sep 2019 12:56:00 GMT+05:00");
+      let endTime = this.producto.fechaFin.toDate();
       let endTimeNumber = (endTime.getTime() / 1000);
 
       let now = new Date();
@@ -133,31 +169,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.minutos = (minutes < 10 ? "0" + minutes : minutes);
       this.segundos = (seconds < 10 ? "0" + seconds : seconds);
     }, 1000);
-
-  }
-
-  constructor(
-    private productosService: ProductosService
-  ) { }
-
-  ngOnInit() {
-
-    this.suscription = this.productosService.listarUltimos5Productos().snapshotChanges().subscribe((respuesta) => {
-      this.productos = [];
-
-      respuesta.forEach(element => {
-        let x: any = element.payload.doc.data();
-        x.uid = element.payload.doc.id;
-        
-        this.productos.push(x);
-      });
-
-      setTimeout(() => {
-        this.inicializarSliderImagenes();
-      });
-
-    });
-
   }
 
   ngOnDestroy() {

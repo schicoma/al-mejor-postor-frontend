@@ -112,8 +112,48 @@
                                 <div class="col-4">
                                     <div class="box_total">
                                         <h5>Calificación</h5>
-                                        <h4>4.0</h4>
-                                        <h6>(03 votos)</h6>
+                                        <h4>{{(usuarioGanador?.calificacion || 0.0) | number: '1.1-1'}}</h4>
+                                        <div class="rating_list"
+                                            *ngIf="!(esMiProductoOfertado && !producto.usuarioCalificado)">
+                                            <ul class="list">
+                                                <li style="padding-left: 0;">
+                                                    <a href="javascript:void(0)">
+                                                        <i class="fa fa-star"
+                                                            *ngIf="(usuarioGanador?.calificacion || 0) >= 1"></i>
+                                                        <i class="fa fa-star"
+                                                            *ngIf="(usuarioGanador?.calificacion || 0) >= 2"></i>
+                                                        <i class="fa fa-star"
+                                                            *ngIf="(usuarioGanador?.calificacion || 0) >= 3"></i>
+                                                        <i class="fa fa-star"
+                                                            *ngIf="(usuarioGanador?.calificacion || 0) >= 4"></i>
+                                                        <i class="fa fa-star"
+                                                            *ngIf="(usuarioGanador?.calificacion || 0) == 5"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="rating_list" *ngIf="esMiProductoOfertado && !producto.usuarioCalificado">
+                                            <ul class="list">
+                                                <li style="padding-left: 0;">
+                                                    <a href="javascript:void(0)">
+                                                        {{calificacion}}
+                                                        <i class="far fa-star" (click)="calificar(1)"
+                                                            [ngClass]="{'fa': calificacion >= 1}"></i>
+                                                        <i class="far fa-star" (click)="calificar(2)"
+                                                            [ngClass]="{'fa': calificacion >= 2}"></i>
+                                                        <i class="far fa-star" (click)="calificar(3)"
+                                                            [ngClass]="{'fa': calificacion >= 3}"></i>
+                                                        <i class="far fa-star" (click)="calificar(4)"
+                                                            [ngClass]="{'fa': calificacion >= 4}"></i>
+                                                        <i class="far fa-star" (click)="calificar(5)"
+                                                            [ngClass]="{'fa': calificacion >= 5}"></i>
+                                                    </a>
+                                                </li>
+                                                <br />
+                                                <button class="genric-btn info-border"
+                                                    (click)="enviarCalificacion()"><span>CALIFICAR</span></button>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-8">
@@ -180,8 +220,26 @@
                                 <div class="col-4">
                                     <div class="box_total">
                                         <h5>Calificación</h5>
-                                        <h4>4.0</h4>
-                                        <h6>(03 votos)</h6>
+                                        <h4>{{(usuarioSubastador?.calificacion || 0.0) | number: '1.1-1'}}</h4>
+                                        <div class="rating_list">
+                                            <ul class="list">
+                                                <li style="padding-left: 0;">
+                                                    <a href="javascript:void(0)">
+                                                        <i class="fa fa-star"
+                                                            *ngIf="(usuarioSubastador?.calificacion || 0) >= 1"></i>
+                                                        <i class="fa fa-star"
+                                                            *ngIf="(usuarioSubastador?.calificacion || 0) >= 2"></i>
+                                                        <i class="fa fa-star"
+                                                            *ngIf="(usuarioSubastador?.calificacion || 0) >= 3"></i>
+                                                        <i class="fa fa-star"
+                                                            *ngIf="(usuarioSubastador?.calificacion || 0) >= 4"></i>
+                                                        <i class="fa fa-star"
+                                                            *ngIf="(usuarioSubastador?.calificacion || 0) == 5"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!--<h6>(03 votos)</h6>-->
                                     </div>
                                 </div>
                                 <div class="col-8">

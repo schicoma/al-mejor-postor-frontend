@@ -60,6 +60,10 @@ export class ProductosService {
     });
   }
 
+  actualizarProductoOnlyProducts(uidProducto: string, data: any) {
+    return this.firebase.collection(this.COLLECTION_NAME).doc(uidProducto).update(data);
+  }
+
   obtenerProducto(id: string) {
     return this.firebase.collection(this.COLLECTION_NAME).doc(id).get();
   }
@@ -69,7 +73,8 @@ export class ProductosService {
   }
 
   listarUltimos5Productos() {
-    return this.firebase.collection(this.COLLECTION_NAME, ref => ref.orderBy('fechaInicio', 'desc').limit(5));
+    return this.firebase.collection(this.COLLECTION_NAME, ref =>
+      ref.where('estado', '==', 'C').orderBy('fechaFin', 'asc').limit(5));
   }
 
   listarProductosByUids(listaProductosUids) {

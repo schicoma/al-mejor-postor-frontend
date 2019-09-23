@@ -15,6 +15,9 @@ export class Producto {
     precioAntiguo: number;
     precioNuevo: number;
 
+    usuarioGanador: any;
+    usuarioCalificado: boolean;
+
     keywords: Array<string>;
     fechaCreacion: any;
 }

@@ -17,18 +17,29 @@
                 <h2 class="contact-title">Mis datos</h2>
             </div>
             <div class="col-lg-8">
-                <form class="form-contact contact_form" autocomplete="off" id="contactForm" novalidate="novalidate">
+                <form class="form-contact contact_form" autocomplete="off" id="contactForm" novalidate="novalidate"
+                    #myForm="ngForm">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">Nombres: </label>
-                                <input class="form-control" disabled [value]="usuario?.nombres">
+                                <input class="form-control" [disabled]="!mostrarFormulario" name="nombres"
+                                    required="required" [(ngModel)]="usuario.nombres" #nombres="ngModel">
+
+                                <div *ngIf="myForm.submitted && nombres.invalid" class="invalid-message">
+                                    <span *ngIf="nombre.errors.required">Campo requerido</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">Apellidos: </label>
-                                <input class="form-control" disabled [value]="usuario?.apellidos">
+                                <input class="form-control" [disabled]="!mostrarFormulario" name="apellidos"
+                                    required="required" [(ngModel)]="usuario.apellidos" #apellidos="ngModel">
+
+                                <div *ngIf="myForm.submitted && nombres.invalid" class="invalid-message">
+                                    <span *ngIf="nombre.apellidos.required">Campo requerido</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-12">
@@ -40,18 +51,23 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label class="control-label">Teléfono: </label>
-                                <input class="form-control" disabled [value]="usuario?.telefono">
+                                <input class="form-control" [disabled]="!mostrarFormulario" name="telefono"
+                                    [(ngModel)]="usuario.telefono" #telefono="ngModel">
+
+                                <div *ngIf="myForm.submitted && telefono.invalid" class="invalid-message">
+                                    <span *ngIf="nombre.telefono.required">Campo requerido</span>
+                                </div>
                             </div>
                         </div>
-                        <!--
                         <div class="col-12">
-                            <div class="form-group">
-                                <input class="form-control" name="subject" id="subject" type="text"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'"
-                                    placeholder='Enter Subject'>
-                            </div>
+                            <button type="button" class="genric-btn primary circle" (click)="actualizarDatos()"
+                                *ngIf="!mostrarFormulario">Actualizar
+                                datos</button>
+                            <button type="button" class="genric-btn primary circle"
+                                (click)="actualizarDatosSubmit(myForm)" *ngIf="mostrarFormulario">Guardar</button>
+                            <button type="button" class="genric-btn link-border circle" (click)="cancelar()"
+                                *ngIf="mostrarFormulario">Cancelar</button>
                         </div>
-                    -->
                     </div>
                 </form>
             </div>

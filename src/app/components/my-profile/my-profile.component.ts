@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { AuthService } from 'src/app/services/core/auth.service';
 import { take } from 'rxjs/operators';
-import { Usuario } from 'src/app/models/usuario';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,8 +13,9 @@ import { ToastrService } from 'ngx-toastr';
 export class MyProfileComponent implements OnInit {
 
   loading = true;
+  mostrarFormulario = false;
   preferencias: Array<any>;
-  usuario: any;
+  usuario: any = {};
 
   constructor(
     private usuarioService: UsuariosService,
@@ -73,7 +73,7 @@ export class MyProfileComponent implements OnInit {
       this.toastr.error('Debe escoger al menos una categoría para guardar sus preferencias');
       return;
     }
-    
+
     this.loading = true;
 
     this.usuarioService.actualizarUsuario(this.usuario.email, {
@@ -83,6 +83,28 @@ export class MyProfileComponent implements OnInit {
     }).finally(() => {
       this.loading = false;
     });
+  }
+
+  actualizarDatos() {
+    this.mostrarFormulario = true;
+  }
+
+  actualizarDatosSubmit(myForm) {
+
+    if (myForm.valid) {
+      this.usuarioService.actualizarUsuario(this.usuario.email, {
+        nombres: this.usuario.nombres,
+        apellidos: this.usuario.apellidos,
+        telefono: this.usuario.telefono
+      }).then(() => {
+        this.mostrarFormulario = false;
+        this.toastr.success("Datos correctamente actualizados");
+      });
+    }
+  }
+
+  cancelar() {
+    this.mostrarFormulario = false;
   }
 
 }

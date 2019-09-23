@@ -23,6 +23,7 @@ declare var $: any;
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
 
+  calificacion = 1;
   cantidadAOfertar: number;
   loading = true;
   mapaDeCategorias: any;
@@ -58,8 +59,13 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnDestroy(): void {
-    this.ofertasSubscription.unsubscribe();
-    this.productoSubscription.unsubscribe();
+    if (this.ofertasSubscription) {
+      this.ofertasSubscription.unsubscribe();
+    }
+
+    if (this.productoSubscription) {
+      this.productoSubscription.unsubscribe();
+    }
   }
 
   ngOnInit() {
@@ -138,6 +144,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         setTimeout(() => {
           this.inicializarSlider();
         });
+      } else {
+        alert('product not found')
       }
 
       this.loading = false;
@@ -156,6 +164,48 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   aumentarCantidadAOfertar() {
     this.cantidadAOfertar = this.cantidadAOfertar + 1;
+  }
+
+  calificar(calificacion) {
+    this.calificacion = calificacion;
+  }
+
+  enviarCalificacion() {
+    this.usuarioService.obtenerUsuarioByDocId(this.producto.usuarioGanador.uid).valueChanges().pipe(take(1))
+      .subscribe((data) => {
+        if (data && data.length) {
+          this.producto.usuarioCalificado = true;
+
+          let usuario: any = data[0];
+
+          let calificacion = 0;
+          let cantidadCalificaciones = 0;
+
+          if (usuario.calificacion) {
+            calificacion = usuario.calificacion;
+          }
+
+          if (usuario.cantidadCalificaciones) {
+            cantidadCalificaciones = usuario.cantidadCalificaciones;
+          }
+
+          calificacion = ((calificacion * cantidadCalificaciones) + this.calificacion) / ++cantidadCalificaciones;
+
+          this.usuarioService.actualizarUsuario(usuario.email, {
+            cantidadCalificaciones: cantidadCalificaciones,
+            calificacion: calificacion
+          }).then(() => {
+            this.usuarioSubastador.calificacion = calificacion;
+
+            this.productosService.actualizarProductoOnlyProducts(this.producto.uid, {
+              usuarioCalificado: true
+            }).then(() => {
+
+            })
+          });
+
+        }
+      });
   }
 
   mostrarFormularioOfertarFn() {

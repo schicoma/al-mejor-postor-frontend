@@ -60,6 +60,20 @@ export class SearchComponent implements OnInit, AfterViewInit {
           if (!this.favoritos) {
             this.favoritos = {};
           }
+
+          this.categoriasServices.obtenerMapaDeCategorias().pipe(first()).subscribe(categorias => {
+
+            if (data && data.preferencias && Object.keys(data.preferencias).length) {
+              for (let preferencia of Object.keys(categorias)) {
+                if (!data.preferencias[preferencia]) {
+                  delete categorias[preferencia];
+                }
+              }
+            }
+
+            this.categorias = categorias;
+
+          });
         });
     }
 
@@ -78,10 +92,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
       }
 
       this.next();
-    });
-
-    this.categoriasServices.obtenerMapaDeCategorias().pipe(first()).subscribe(data => {
-      this.categorias = data;
     });
 
   }
