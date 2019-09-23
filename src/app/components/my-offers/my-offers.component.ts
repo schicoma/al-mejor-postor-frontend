@@ -23,7 +23,6 @@ export class MyOffersComponent implements OnInit {
   ngOnInit() {
     this.obtenerOfertasPorProductos();
 
-
     this.categoriaService.obtenerMapaDeCategorias().subscribe(
       (data) => {
         this.mapaDeCategorias = data;

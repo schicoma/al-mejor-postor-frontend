@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterContentInit, ɵConsole } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ProductosService } from 'src/app/services/productos.service';
 import { Producto } from 'src/app/models/producto';
@@ -53,14 +53,17 @@ export class CreateProductComponent implements OnInit, AfterContentInit {
       this.myDropzone = new Dropzone("div.dropzone", {
         url: "/file/post",
         addRemoveLinks: true,
-        acceptedFiles: "image/jpeg,image/png"
+        acceptedFiles: "image/jpeg,image/png",
+        maxFiles: 6,
+        "error": function (file, message, xhr) {
+          if (xhr == null) this.removeFile(file); // perhaps not remove on xhr errors
+        }
       });
     });
 
   }
 
   async registrarProducto(form) {
-
     this.errorImagenesRequerido = false;
 
     if (!this.myDropzone.files.length) {
@@ -97,7 +100,9 @@ export class CreateProductComponent implements OnInit, AfterContentInit {
 
       producto.fechaInicio = fechaInicio.toDate();
       producto.fechaFin = fechaFin.toDate();
+      producto.fechaCreacion = new Date();
       producto.estado = 'C';
+      producto.keywords = this.createKeywords(producto.nombre);
       producto.imagenes = [];
 
       for (const file of this.myDropzone.files) {
@@ -113,11 +118,13 @@ export class CreateProductComponent implements OnInit, AfterContentInit {
 
       }
 
-      this.productosService.guardarProducto(this.authService.usuario.uid, producto)
+      let uidProductoGenerado = this.productosService.generateUId();
+
+      this.productosService.guardarProductoWithCustomUid(uidProductoGenerado, this.authService.usuario.uid, producto)
         .then((respuesta) => {
           this.toastr.success('Producto creado correctamente');
 
-          this.router.navigate(['/product-detail', respuesta.id]);
+          this.router.navigate(['/product-detail', uidProductoGenerado]);
         })
         .finally(() => {
           this.loading = false;
@@ -127,5 +134,41 @@ export class CreateProductComponent implements OnInit, AfterContentInit {
     }
 
   }
+
+  private createKeywords(name: string): Array<string> {
+    let merged = new Set<string>();
+
+    let words = name.toUpperCase().split(' ');
+    let words_length = name.split(' ').length;
+
+    for (let i = 0; i < words_length; i++) {
+      let buildName = '';
+
+      words.forEach((w, index) => {
+        if (index >= i) {
+          buildName = buildName.concat(w + ' ');
+        }
+      });
+
+      merged = new Set([...merged, ...this.generateArrayFromString(buildName)]);
+
+    }
+
+    return [...merged];
+
+  }
+
+  private generateArrayFromString(name: string) {
+    const arrName: Array<string> = [];
+    let curName = '';
+    name.split('').forEach((letter) => {
+      curName += letter;
+      if (curName.length >= 3) {
+        arrName.push(curName.trim());
+      }
+    });
+    return arrName;
+  }
+
 
 }

@@ -1,5 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
-@import "~jquery-nice-select/css/nice-select";
+
+@import "src/assets/css/bootstrap.min";
+@import "src/assets/css/animate";
+@import "src/assets/css/owl.carousel.min";
+@import url("assets/css/flaticon.css");
+@import url("assets/css/themify-icons.css");
+//@import "src/assets/css/magnific-popup";
+@import "src/assets/css/slick";
+@import "src/assets/css/price_rangs";
+@import url("assets/css/lightslider.min.css");
+@import "src/assets/css/dropzone";
+@import url("assets/css/style.css");
+@import "node_modules/ngx-toastr/toastr";
+@import "node_modules/jquery-nice-select/css/nice-select";
 
 .invalid-message {
   width: 100%;

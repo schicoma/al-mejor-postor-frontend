@@ -1,7 +1,7 @@
 import { Oferta } from './oferta';
 
 export class Producto {
-    id: number;
+    uid: string;
     categoria: number = -1;
     nombre: string;
     descripcion: string;
@@ -14,4 +14,7 @@ export class Producto {
 
     precioAntiguo: number;
     precioNuevo: number;
+
+    keywords: Array<string>;
+    fechaCreacion: any;
 }

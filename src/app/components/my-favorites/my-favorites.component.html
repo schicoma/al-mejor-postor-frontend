@@ -1,0 +1,55 @@
+<app-header></app-header>
+
+<div class="loading" *ngIf="loading">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+
+<section class="sample-text-area">
+    <div class="container box_1170">
+        <h3 class="text-heading">Mis favoritos</h3>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-left" scope="col">Producto</th>
+                        <th class="text-left" scope="col">Categoría</th>
+                        <th class="text-right" scope="col">Fecha fin de subasta</th>
+                        <th class="text-right" scope="col">Precio actual</th>
+                        <th class="text-center" scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let producto of favoritos; let i = index">
+                        <th scope="row" class="text-left">
+                            <a [routerLink]="['/product-detail', producto.uid]">
+                                {{producto.nombre}}
+                            </a>
+                        </th>
+                        <td class="text-left">
+                            <b>{{mapaDeCategorias[producto.categoria]}}</b>
+                        </td>
+                        <td class="text-right">{{producto.fechaFin.toDate() | formatoFecha: 'DD/MM/YYYY'}}</td>
+                        <td class="text-right">{{(producto.precioNuevo || producto.precio) | customCurrency }}</td>
+                        <td class="center">
+                            <button class="btn btn-sm btn-danger" title="Quitar de mis favoritos"
+                                (click)="quitarDeMisFavoritos(producto.uid, i)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="!favoritos?.length">
+                        <td colspan="5">No hay ofertas realizadas</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>
