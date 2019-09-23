@@ -14,13 +14,12 @@
     <div class="container box_1170">
         <h3 class="text-heading">Mis ofertas</h3>
         <div class="table-responsive">
-
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th class="text-center" scope="col">Fecha</th>
                         <th class="text-left" scope="col">Producto</th>
-                        <th class="text-left" scope="col">Estado</th>
+                        <th class="text-left" scope="col">Categoría</th>
                         <th class="text-right" scope="col">Precio Anterior</th>
                         <th class="text-right" scope="col">Nuevo Precio</th>
                     </tr>
@@ -29,7 +28,7 @@
                     <tr *ngFor="let ofertaObject of ofertas">
                         <td class="text-center">{{ofertaObject.fecha.toDate() | formatoFecha}}</td>
                         <th scope="row" class="text-left">
-                            <a [routerLink]="['/product-detail', ofertaObject.producto.uid]"> 
+                            <a [routerLink]="['/product-detail', ofertaObject.producto.uid]">
                                 {{ofertaObject.producto.nombre}}
                             </a>
                         </th>
@@ -43,7 +42,7 @@
                         <td colspan="5">No hay ofertas realizadas</td>
                     </tr>
                 </tbody>
-            </table> 
+            </table>
         </div>
     </div>
 </section>

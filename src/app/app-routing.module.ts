@@ -10,6 +10,7 @@ import { CreateProductComponent } from './components/views/create-product/create
 import { CanActivateViaAuth } from './guards/can-activate-via-auth';
 import { MyOffersComponent } from './components/my-offers/my-offers.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { MyFavoritesComponent } from './components/my-favorites/my-favorites.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,11 @@ const routes: Routes = [
   {
     path: 'my-offers',
     component: MyOffersComponent,
+    canActivate: [CanActivateViaAuth]
+  },
+  {
+    path: 'my-favorites',
+    component: MyFavoritesComponent,
     canActivate: [CanActivateViaAuth]
   },
   {

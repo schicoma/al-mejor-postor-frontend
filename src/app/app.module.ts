@@ -48,6 +48,8 @@ import { FormatoFechaPipe } from './pipes/formato-fecha.pipe';
 import { CustomCurrencyPipe } from './pipes/custom-currency.pipe';
 import { DecimalPipe } from '@angular/common';
 import { MustMatchDirective } from './directives/must-match.directive';
+import { MyFavoritesComponent } from './components/my-favorites/my-favorites.component';
+import { FavoritosService } from './services/favoritos.service';
 
 
 @NgModule({
@@ -68,7 +70,8 @@ import { MustMatchDirective } from './directives/must-match.directive';
     FormatoFechaPipe,
     CustomCurrencyPipe,
     MyOffersComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    MyFavoritesComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +91,7 @@ import { MustMatchDirective } from './directives/must-match.directive';
     ProductosService,
     CategoriasService,
     OfertasService,
+    FavoritosService,
     AuthService,
     CanActivateViaAuth,
     DecimalPipe

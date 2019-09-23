@@ -3,6 +3,10 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ProductosService } from 'src/app/services/productos.service';
 import { take, first } from 'rxjs/operators';
 import { CategoriasService } from 'src/app/services/categorias.service';
+import { FavoritosService } from 'src/app/services/favoritos.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { AuthService } from 'src/app/services/core/auth.service';
+
 declare var $: any;
 
 @Component({
@@ -15,6 +19,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   categorias: any;
   items: Array<any>;
 
+  favoritos: any;
   firstInResponse: any;
   lastInResponse: any;
   nombreAFiltrar: string;
@@ -30,7 +35,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private productosServices: ProductosService,
-    private categoriasServices: CategoriasService
+    private categoriasServices: CategoriasService,
+    private usuarioService: UsuariosService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -41,9 +48,22 @@ export class SearchComponent implements OnInit, AfterViewInit {
       window.scrollTo(0, 0)
     });
 
-    this.activatedRoute.queryParams.subscribe(params => {
-      console.log(params);
+    if (this.authService.estaElUsuarioEnSesion()) {
+      let usuarioEmail = this.authService.usuario.email;
 
+      this.usuarioService.obtenerUsuarioByEmail(usuarioEmail).valueChanges().pipe(take(1))
+        .subscribe((data: any) => {
+          if (data) {
+            this.favoritos = data.favoritos;
+          }
+
+          if (!this.favoritos) {
+            this.favoritos = {};
+          }
+        });
+    }
+
+    this.activatedRoute.queryParams.subscribe(params => {
       if (params.filterCategory) {
         this.options.filterCategory = params.filterCategory;
       }
@@ -91,7 +111,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   filtrarPorNombre(nombre?: any) {
-    alert(nombre);
+    console.log(nombre);
     this.clearCursors();
 
     if (this.orderBy) {
@@ -107,9 +127,39 @@ export class SearchComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/search'], { queryParams: this.options });
   }
 
+  marcarFavorito(item) {
+
+    let usuarioUid = this.authService.usuario.uid;
+
+    this.usuarioService.obtenerUsuarioByDocId(usuarioUid).valueChanges().pipe(take(1))
+      .subscribe((data: any) => {
+
+        if (data) {
+          let favoritos = data[0].favoritos;
+
+          if (!favoritos) {
+            favoritos = {};
+          }
+
+          if (!favoritos[item.uid]) {
+            favoritos[item.uid] = true;
+          } else {
+            favoritos[item.uid] = !favoritos[item.uid];
+          }
+
+          item.favorito = favoritos[item.uid];
+
+          this.favoritos = favoritos;
+
+          this.usuarioService.actualizarFavoritosFromUsuarioByDocId(data[0].email, favoritos).then((data) => {
+
+          });
+
+        }
+      });
+  }
 
   next() {
-    console.log('next');
     this.productosServices.listarProductosNext(this.lastInResponse, this.options).snapshotChanges().pipe(take(1)).subscribe((respuesta) => {
 
       if (!respuesta.length) {
@@ -121,6 +171,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
       respuesta.forEach((element: any) => {
         let x = element.payload.doc.data();
         x['uid'] = element.payload.doc.id;
+
+        if (this.authService.estaElUsuarioEnSesion()) {
+          x.favorito = !!(this.favoritos[x.uid]);
+        }
 
         this.items.push(x);
       });
@@ -140,13 +194,16 @@ export class SearchComponent implements OnInit, AfterViewInit {
   }
 
   prev() {
-    console.log('prev');
     this.productosServices.listarProductosPrev(this.get_prev_startAt(), this.options).snapshotChanges().pipe(take(1)).subscribe((respuesta) => {
       this.items = [];
 
       respuesta.forEach((element: any) => {
         let x = element.payload.doc.data();
         x['uid'] = element.payload.doc.id;
+
+        if (this.authService.estaElUsuarioEnSesion()) {
+          x.favorito = !!(this.favoritos[x.uid]);
+        }
 
         this.items.push(x);
       });

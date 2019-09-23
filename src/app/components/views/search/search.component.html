@@ -66,8 +66,9 @@
                                     <input type="text" class="form-control" placeholder="search"
                                         [(ngModel)]="nombreAFiltrar" aria-describedby="inputGroupPrepend">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" style="cursor: pointer;" (click)="filtrarPorNombre(nombreAFiltrar)"
-                                            id="inputGroupPrepend"><i class="ti-search"></i>
+                                        <span class="input-group-text" style="cursor: pointer;"
+                                            (click)="filtrarPorNombre(nombreAFiltrar)" id="inputGroupPrepend"><i
+                                                class="ti-search"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -88,10 +89,11 @@
                             <div class="single_product_text">
                                 <h4>{{item.nombre}}</h4>
                                 <h3>{{item.precio | customCurrency}}</h3>
+                                <i [ngClass]="{'fas text-danger': item.favorito, 'far': !item.favorito}"
+                                    (click)="marcarFavorito(item)" style="cursor: pointer" class="fa-heart"></i>
                                 <a [routerLink]="['/product-detail', item.uid]" class="add_cart"
                                     style="opacity:1; visibility: visible !important">Lo
                                     quiero
-                                    <!--<i class="ti-heart"></i>-->
                                 </a>
                             </div>
                         </div>

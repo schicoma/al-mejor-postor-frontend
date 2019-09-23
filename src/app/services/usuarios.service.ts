@@ -24,11 +24,20 @@ export class UsuariosService {
     });
   }
 
-  obtenerUsuario(email: string) {
+  obtenerUsuarioByEmail(email: string) {
     return this.firebase.collection('usuarios').doc(email);
+  }
+
+  obtenerUsuarioByDocId(docId: string) {
+    return this.firebase.collection('usuarios', ref => ref.where('uid', '==', docId));
   }
 
   actualizarUsuario(uidUsuario: string, data: any) {
     return this.firebase.collection('usuarios').doc(uidUsuario).update(data);
   }
+
+  actualizarFavoritosFromUsuarioByDocId(uidUsuario: string, data: any/*Map<string, boolean>*/) {
+    return this.firebase.collection('usuarios').doc(uidUsuario).update({ favoritos: data });
+  }
+
 }

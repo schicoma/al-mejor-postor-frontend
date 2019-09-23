@@ -26,6 +26,9 @@
             <div class="col-lg-5 col-xl-4">
                 <div class="s_product_text">
                     <!--<h5>previous <span>|</span> next</h5>-->
+                    <div class="alert alert-warning" *ngIf="subastaCerrada">
+                        SUBASTA CERRADA
+                    </div>
                     <h3>{{producto.nombre}}</h3>
                     <h2 *ngIf="producto.precioNuevo">
                         {{producto.precioNuevo | customCurrency }} <small *ngIf="producto.precioAntiguo"
@@ -41,11 +44,13 @@
                             <a href="#"> <span>Estado</span> : Nuevo</a>
                         </li>
                     -->
-                        <li>
-                            <a href="#"> <span>Comienza el</span> : {{producto.fechaInicio?.toDate() | formatoFecha: 'DD/MM/YYYY'}}</a>
+                        <li *ngIf="!subastaCerrada">
+                            <a href="#"> <span>Comienza el</span> :
+                                {{producto.fechaInicio?.toDate() | formatoFecha: 'DD/MM/YYYY'}}</a>
                         </li>
                         <li>
-                            <a href="#"> <span>Cierre</span> : {{producto.fechaFin?.toDate() | formatoFecha: 'DD/MM/YYYY'}}</a>
+                            <a href="#"> <span>Cierre</span> :
+                                {{producto.fechaFin?.toDate() | formatoFecha: 'DD/MM/YYYY'}}</a>
                         </li>
                         <li class="mt-2">
                             <a href="#"> <i class="fa fa-map-marker-alt"></i> Lima</a>
@@ -53,9 +58,9 @@
                     </ul>
                     <blockquote class="generic-blockquote mt-3">{{producto.descripcion}}</blockquote>
                     <div class="card_area d-flex justify-content-between align-items-center"
-                        *ngIf="!mostrarFormularioAOfertar && !esMiProductoOfertado">
+                        *ngIf="!mostrarFormularioAOfertar && !esMiProductoOfertado && !subastaCerrada">
                         <a href="javascript:void(0)" class="btn_3" (click)="mostrarFormularioOfertarFn()">OFERTAR</a>
-                   <!--
+                        <!--
                         <a href="javascript:void(0)" class="like_us"> <i class="ti-heart"></i> </a>
                 -->
                     </div>
@@ -84,9 +89,13 @@
 <section class="product_description_area">
     <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" *ngIf="subastaCerrada">
+                <a class="nav-link" [ngClass]="{'active': subastaCerrada}" id="ofertas-tab" data-toggle="tab"
+                    href="#ganador" role="tab" aria-controls="ganador" aria-selected="true">Ganador</a>
+            </li>
             <li class="nav-item">
-                <a class="nav-link active" id="ofertas-tab" data-toggle="tab" href="#ofertas" role="tab"
-                    aria-controls="ofertas" aria-selected="true">Ofertas</a>
+                <a class="nav-link" [ngClass]="{'active': !subastaCerrada}" id="ofertas-tab" data-toggle="tab"
+                    href="#ofertas" role="tab" aria-controls="ofertas" aria-selected="true">Ofertas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="contacto-tab" data-toggle="tab" href="#contacto" role="tab"
@@ -94,7 +103,47 @@
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="ofertas" role="tabpanel" aria-labelledby="ofertas-tab">
+            <div class="tab-pane fade" [ngClass]="{'show active': subastaCerrada}" id="ganador" role="tabpanel"
+                aria-labelledby="ganador-tab" *ngIf="subastaCerrada">
+                <div class="col-lg-10 col-lx-4">
+                    <div class="confirmation_part">
+                        <div class="single_confirmation_details">
+                            <div class="row total_rate" *ngIf="usuarioGanador && !loading">
+                                <div class="col-4">
+                                    <div class="box_total">
+                                        <h5>Calificación</h5>
+                                        <h4>4.0</h4>
+                                        <h6>(03 votos)</h6>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <h3>GANADOR DE LA SUBASTA</h3>
+                                    <ul>
+                                        <li>
+                                            <p>Nombres</p><span>: {{usuarioGanador?.nombres}}</span>
+                                        </li>
+                                        <li>
+                                            <p>Apellidos</p><span>: {{usuarioGanador?.apellidos}}</span>
+                                        </li>
+                                        <li>
+                                            <p>Email</p><span>: {{usuarioGanador?.email}}</span>
+                                        </li>
+                                        <li>
+                                            <p>Teléfono</p><span>: {{usuarioGanador?.telefono}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div *ngIf="!usuarioGanador && !loading">
+                                No hubo un ganador en esta subasta
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" [ngClass]="{'show active': !subastaCerrada}" id="ofertas" role="tabpanel"
+                aria-labelledby="ofertas-tab">
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -115,33 +164,45 @@
                                 <td class="text-right">{{ofertaObject.precioNuevo | customCurrency }}</td>
                             </tr>
                             <tr *ngIf="!ofertas?.length">
-                               <td colspan="4">
+                                <td colspan="4">
                                     Aún no hay ofertas para este producto
-                               </td> 
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="tab-pane fade" id="contacto" role="tabpanel" aria-labelledby="contacto-tab">
-                <div class="col-lg-8 col-lx-4">
+                <div class="col-lg-10 col-lx-4">
                     <div class="confirmation_part">
                         <div class="single_confirmation_details">
-                            <h4>Resumen de contacto</h4>
-                            <ul>
-                                <li>
-                                    <p>Nombres</p><span>: Sebastian</span>
-                                </li>
-                                <li>
-                                    <p>Apellidos</p><span>: Chicoma</span>
-                                </li>
-                                <li>
-                                    <p>Email</p><span>: sebastianchicoma97@gmail.com</span>
-                                </li>
-                                <li>
-                                    <p>Teléfono</p><span>: 999777666</span>
-                                </li>
-                            </ul>
+                            <div class="row total_rate">
+                                <div class="col-4">
+                                    <div class="box_total">
+                                        <h5>Calificación</h5>
+                                        <h4>4.0</h4>
+                                        <h6>(03 votos)</h6>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <h4>Resumen de contacto</h4>
+                                    <ul>
+                                        <li>
+                                            <p>Nombres</p><span>: {{usuarioSubastador?.nombres}}</span>
+                                        </li>
+                                        <li>
+                                            <p>Apellidos</p><span>: {{usuarioSubastador?.apellidos}}</span>
+                                        </li>
+                                        <li>
+                                            <p>Email</p><span>: {{usuarioSubastador?.email}}</span>
+                                        </li>
+                                        <li>
+                                            <p>Teléfono</p><span>: {{usuarioSubastador?.telefono}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>

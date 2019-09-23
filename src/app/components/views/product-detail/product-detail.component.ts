@@ -31,9 +31,12 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   ofertasSubscription: Subscription;
   product_overview: any;
   productoSubscription: Subscription;
+  subastaCerrada = false;
   uidProducto: string;
   uidUsuario: string;
   usuarioDB: any;
+  usuarioGanador: any;
+  usuarioSubastador: any;
 
   /*
   * Esta variable sirve para saber si el producto que se muestra es un producto que ha sido registrado
@@ -44,7 +47,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   producto: Producto = new Producto();
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private activatedRouter: ActivatedRoute,
     private productosService: ProductosService,
     private ofertasService: OfertasService,
@@ -66,7 +69,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     if (usuarioEnSesion) {
       this.uidUsuario = this.authService.usuario.uid;
 
-      this.usuarioService.obtenerUsuario(this.authService.usuario.email).valueChanges().pipe(take(1))
+      this.usuarioService.obtenerUsuarioByEmail(this.authService.usuario.email).valueChanges().pipe(take(1))
         .subscribe((usuario) => {
           this.usuarioDB = usuario;
         });
@@ -88,9 +91,32 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
         this.producto = productoFromDB;
 
+        this.subastaCerrada = this.producto.estado === "S";
+
+        if (this.subastaCerrada) {
+          let usuarioGanadorUid = productoFromDB.usuarioGanador.uid;
+
+          if (usuarioGanadorUid !== 'UNKNOWN') {
+            this.usuarioService.obtenerUsuarioByDocId(usuarioGanadorUid).valueChanges().pipe(take(1))
+              .subscribe((data) => {
+                if (data) {
+                  this.usuarioGanador = data[0];
+                }
+              });
+          }
+        }
+
         if (!this.producto.precioNuevo) {
           this.producto.precioNuevo = this.producto.precio;
         }
+
+        // Obteniendo datos del usuarios que oferto el producto
+        this.usuarioService.obtenerUsuarioByDocId(productoFromDB.usuario.uid).valueChanges().pipe(take(1))
+          .subscribe((data) => {
+            if (data) {
+              this.usuarioSubastador = data[0];
+            }
+          });
 
         if (this.uidUsuario === productoFromDB.usuario.uid) {
           this.esMiProductoOfertado = true;

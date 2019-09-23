@@ -27,7 +27,7 @@ export class MyProfileComponent implements OnInit {
   ngOnInit() {
 
     if (this.authService.estaElUsuarioEnSesion()) {
-      this.usuarioService.obtenerUsuario(this.authService.usuario.email)
+      this.usuarioService.obtenerUsuarioByEmail(this.authService.usuario.email)
         .valueChanges().pipe(take(1)).subscribe((respuesta) => {
           this.usuario = respuesta;
 
