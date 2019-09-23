@@ -15,6 +15,7 @@ export class MyFavoritesComponent implements OnInit {
 
   mapaDeCategorias;
   favoritos: Array<any> = [];
+  loading = true;
 
   constructor(
     private usuarioService: UsuariosService,
@@ -57,8 +58,14 @@ export class MyFavoritesComponent implements OnInit {
                       this.favoritos.push(data.data());
                     });
                   }
+
+                  this.loading = false;
                 });
+            } else {
+              this.loading = false;
             }
+          } else {
+            this.loading = false;
           }
         });
     }
